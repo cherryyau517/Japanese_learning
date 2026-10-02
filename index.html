@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Personal Japanese grammar, lesson, conjugation and vocabulary reference with quizzes and flashcards — lessons 14–30.">
+<meta name="theme-color" content="#2c2c2c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Japanese Grammar Reference — By Use Case</title>
+<style>
+  :root{
+    --bg:#faf8f5; --card:#ffffff; --ink:#222; --sub:#6b6b6b;
+    --accent:#c0392b; --accent2:#2c6e49; --border:#e6e0d8; --tag:#eef3f0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+  }
+  header{
+    padding:28px 24px 18px; background:linear-gradient(135deg,#2c2c2c,#454545); color:#fff;
+    position:sticky; top:0; z-index:10;
+  }
+  header h1{margin:0 0 4px; font-size:22px; font-weight:600;}
+  header p{margin:0; font-size:13px; color:#cfcfcf;}
+  .controls{
+    margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  }
+  #search{
+    flex:1; min-width:220px; padding:9px 14px; border-radius:8px; border:none;
+    font-size:16px; outline:none;
+  }
+  main{max-width:980px; margin:0 auto; padding:24px;}
+  .filter-panel{
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:16px 18px 18px; margin-bottom:22px;
+  }
+  .filter-panel-head{
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;
+  }
+  .filter-panel-head span{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--sub);}
+  .chip-all-btn{
+    background:var(--ink); color:#fff; border:none; border-radius:999px; padding:6px 14px;
+    font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .chip-all-btn.active{background:var(--accent);}
+  .filter-cluster{margin-bottom:12px;}
+  .filter-cluster:last-child{margin-bottom:0;}
+  .cluster-label{
+    font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent2);
+    font-weight:700; margin-bottom:7px;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:7px;}
+  .chip{
+    background:var(--tag); color:var(--ink); border:1px solid var(--border); border-radius:999px;
+    padding:6px 13px; font-size:12.5px; cursor:pointer; line-height:1.3;
+  }
+  .chip:hover{border-color:var(--accent2);}
+  .chip.active{background:var(--accent2); color:#fff; border-color:var(--accent2); font-weight:600;}
+  .count{font-size:13px; color:var(--sub); margin-bottom:14px;}
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:18px 20px; margin-bottom:16px; box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card-head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap;
+    margin-bottom:6px;
+  }
+  .pattern{
+    font-size:19px; font-weight:700; color:var(--accent);
+  }
+  .lesson-tag{
+    font-size:11px; color:var(--sub); background:var(--tag); border-radius:5px; padding:3px 8px;
+    white-space:nowrap;
+  }
+  .meaning{
+    font-size:14.5px; color:var(--ink); margin:2px 0 10px; font-weight:500;
+  }
+  .examples{border-top:1px dashed var(--border); padding-top:10px;}
+  .example{margin-bottom:8px;}
+  .example:last-child{margin-bottom:0;}
+  .jp{font-size:15px;}
+  .en{font-size:13px; color:var(--sub);}
+  .section-title{
+    font-size:20px; margin:34px 0 14px; padding-bottom:6px; border-bottom:2px solid var(--accent2);
+    color:var(--accent2);
+  }
+  .section-title:first-of-type{margin-top:0;}
+  .hidden{display:none;}
+  footer{text-align:center; padding:30px; color:var(--sub); font-size:12px;}
+
+  .tabs{display:flex; gap:8px; margin-top:16px;}
+  .tab-btn{
+    background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.25);
+    border-radius:8px 8px 0 0; padding:8px 16px; font-size:13px; cursor:pointer; font-weight:600;
+  }
+  .tab-btn.active{background:var(--bg); color:var(--ink); border-bottom:none;}
+  .page{display:none;}
+  .page.active{display:block;}
+
+  .quiz-intro{font-size:13px; color:var(--sub); margin-bottom:18px;}
+  .quiz-card{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:18px 20px; margin-bottom:16px; box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  .quiz-q{font-size:15.5px; font-weight:600; margin-bottom:12px;}
+  .quiz-q .qnum{color:var(--accent); margin-right:6px;}
+  .quiz-progress{font-size:13px; color:var(--sub); margin-bottom:12px; display:flex; justify-content:space-between;}
+  .quiz-options{display:flex; flex-direction:column; gap:8px;}
+  .quiz-option{
+    padding:10px 14px; border:1px solid var(--border);
+    border-radius:8px; cursor:pointer; font-size:14px; background:#fdfcfa;
+    transition:background 0.15s, border-color 0.15s;
+  }
+  .quiz-option:hover{border-color:var(--accent2);}
+  .quiz-option.correct{border-color:var(--accent2); background:#e6f3ea; font-weight:600;}
+  .quiz-option.incorrect{border-color:var(--accent); background:#fbe9e7; cursor:default; opacity:0.75;}
+  .quiz-explain{font-size:12.5px; color:var(--sub); margin-top:10px; display:none; padding-top:8px; border-top:1px dashed var(--border);}
+  .quiz-actions{display:flex; align-items:center; gap:14px; margin:20px 0 40px;}
+  .quiz-btn{
+    background:var(--accent2); color:#fff; border:none; border-radius:8px; padding:11px 22px;
+    font-size:14px; font-weight:600; cursor:pointer;
+  }
+  .quiz-btn:hover{opacity:0.9;}
+  .quiz-btn.active{background:var(--accent) !important; box-shadow:0 0 0 2px var(--accent) inset;}
+  .quiz-score{font-size:15px; font-weight:700; color:var(--accent2);}
+  .quiz-done{margin-top:14px; font-weight:700; color:var(--accent2); font-size:15px;}
+  .quiz-hint{font-size:12.5px; color:var(--sub); margin-top:8px; font-style:italic;}
+
+  .conj-group-desc{font-size:13px; color:var(--sub); margin:-2px 0 12px;}
+  .conj-example-tag{font-size:12px; color:var(--sub); background:var(--tag); border-radius:5px; padding:3px 8px; white-space:nowrap;}
+  .conj-table-wrap{overflow-x:auto;}
+  .conj-table{width:100%; border-collapse:collapse; margin-top:4px;}
+  .conj-table th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; color:var(--sub);
+    font-weight:700; padding:6px 10px; border-bottom:2px solid var(--border); white-space:nowrap;
+  }
+  .conj-table td{padding:9px 10px; border-bottom:1px solid var(--border); font-size:14px; vertical-align:top; white-space:nowrap;}
+  .conj-table tr:last-child td{border-bottom:none;}
+  .conj-table .conj-form{font-weight:600; color:var(--ink); white-space:nowrap;}
+  .conj-table .conj-rule{color:var(--sub); font-size:12.5px;}
+  .conj-table .conj-jp{color:var(--accent); font-weight:600;}
+  .conj-table .conj-start{color:var(--accent2);}
+  .conj-note{font-size:12px; color:var(--sub); margin-top:10px; padding-top:8px; border-top:1px dashed var(--border); font-style:italic;}
+
+  .vocab-progress{text-align:center; font-size:13px; color:var(--sub); margin-bottom:14px;}
+  .flashcard{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:50px 24px; text-align:center; cursor:pointer; min-height:170px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04); user-select:none;
+  }
+  .flashcard:hover{border-color:var(--accent2);}
+  .flashcard-lesson{font-size:11px; color:var(--sub); background:var(--tag); border-radius:5px; padding:3px 8px; margin-bottom:16px;}
+  .flashcard-jp{font-size:30px; font-weight:700; color:var(--accent);}
+  .flashcard-reading{font-size:14px; color:var(--sub); margin-top:8px;}
+  .flashcard-en{font-size:21px; font-weight:600; color:var(--accent2);}
+  .flashcard-hint{font-size:11px; color:var(--sub); margin-top:18px;}
+  .vocab-controls{display:flex; justify-content:center; align-items:center; gap:12px; margin:20px 0 40px; flex-wrap:wrap;}
+  .vocab-controls .quiz-btn{min-width:90px;}
+
+  /* ── Mobile ── */
+  @media (max-width: 640px){
+    header{padding:18px 14px 14px;}
+    header h1{font-size:17px;}
+    header p{font-size:11.5px;}
+    .controls{margin-top:10px;}
+    #search{width:100%; min-width:0;}
+    .tabs{margin-top:12px; flex-wrap:wrap;}
+    .tab-btn{flex:1 1 28%; min-width:0; padding:10px 6px; font-size:12px; text-align:center; white-space:normal; line-height:1.25;}
+    main{padding:14px;}
+    .filter-panel{padding:12px 12px 14px; margin-bottom:16px;}
+    .filter-panel-head{flex-wrap:wrap; gap:8px;}
+    .cluster-label{font-size:10.5px;}
+    .chip{padding:7px 12px; font-size:12px;}
+    .card{padding:14px 15px; margin-bottom:12px;}
+    .card-head{flex-direction:column; align-items:flex-start; gap:4px;}
+    .pattern{font-size:17px;}
+    .section-title{font-size:17px; margin:26px 0 12px;}
+    .jp{font-size:14.5px;}
+    .quiz-card{padding:14px 15px;}
+    .quiz-q{font-size:14.5px;}
+    .quiz-option{padding:12px 14px; font-size:14.5px;}
+    .quiz-actions{flex-wrap:wrap; gap:10px; margin:16px 0 30px;}
+    .quiz-btn{flex:1; min-width:120px; padding:12px 16px;}
+    .quiz-score{width:100%; order:3;}
+    .conj-table{font-size:12.5px;}
+    .conj-table th{padding:5px 5px; font-size:10px;}
+    .conj-table td{padding:7px 5px; font-size:12.5px;}
+    .conj-table .conj-rule{font-size:11px;}
+    .flashcard{padding:36px 16px; min-height:140px;}
+    .flashcard-jp{font-size:24px;}
+    .flashcard-en{font-size:18px;}
+    .vocab-controls{gap:8px; margin:16px 0 30px;}
+    .vocab-controls .quiz-btn{flex:1; min-width:80px; padding:11px 10px; font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>日本語文法リファレンス — Japanese Grammar Reference</h1>
+  <p>Lessons 14–30 · Organized by use case (what you're trying to say) · Japanese + English only</p>
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search grammar, meaning, or example (Japanese or English)...">
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" id="tabRef" onclick="showPage('reference')">📖 Use Cases</button>
+    <button class="tab-btn" id="tabLesson" onclick="showPage('lesson')">🏫 Lesson</button>
+    <button class="tab-btn" id="tabConj" onclick="showPage('conjugation')">🔤 Conjugation</button>
+    <button class="tab-btn" id="tabVocab" onclick="showPage('vocab')">🃏 Vocabulary</button>
+    <button class="tab-btn" id="tabQuiz" onclick="showPage('quiz')">📝 Quiz</button>
+  </div>
+</header>
+
+<main>
+  <div class="page active" id="referencePage">
+    <div class="filter-panel" id="categoryFilter"></div>
+    <div class="count" id="count"></div>
+    <div id="cardContainer"></div>
+  </div>
+
+  <div class="page" id="lessonPage">
+    <div class="filter-panel" id="lessonFilter"></div>
+    <div class="count" id="lessonCount"></div>
+    <div id="lessonCardContainer"></div>
+  </div>
+
+  <div class="page" id="conjugationPage">
+    <div class="quiz-intro">Quick rules for turning verbs and adjectives into their short (plain) forms — the base you build て-form, たら, と, and plain-form grammar patterns on. Each rule shown with one worked example.</div>
+    <div id="conjugationContainer"></div>
+  </div>
+
+  <div class="page" id="vocabPage">
+    <div class="quiz-intro">New words pulled from your lesson notes (lessons 16–30). Pick a lesson range below, then tap the card to flip between the word and its meaning.</div>
+    <div class="filter-panel" id="vocabFilter"></div>
+    <div class="vocab-progress" id="vocabProgress"></div>
+    <div id="flashcardContainer"></div>
+    <div class="vocab-controls">
+      <button class="quiz-btn" style="background:#8a8a8a;" onclick="prevCard()">◀ Prev</button>
+      <button class="quiz-btn" onclick="nextCard()">Next ▶</button>
+      <button class="quiz-btn" style="background:#8a8a8a;" onclick="shuffleDeck()">🔀 Shuffle</button>
+      <button class="quiz-btn" id="reverseBtn" style="background:#8a8a8a;" onclick="toggleReverse()">🔁 Reverse</button>
+    </div>
+  </div>
+
+  <div class="page" id="quizPage">
+    <div class="quiz-intro">Multiple-choice questions generated automatically from the grammar reference above. Pick an answer — a wrong choice is marked incorrect and stays disabled, so keep trying until you find the correct one.</div>
+    <div class="quiz-progress" id="quizProgress"></div>
+    <div id="quizContainer"></div>
+    <div class="quiz-actions">
+      <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()" style="display:none;">Next Question →</button>
+      <button class="quiz-btn" style="background:#8a8a8a;" onclick="startNewQuiz()">🔀 New Quiz</button>
+      <div class="quiz-score" id="quizScore"></div>
+    </div>
+  </div>
+</main>
+
+<footer>Compiled from personal lesson notes for quick daily-conversation reference.</footer>
+
+<script>
+const data = [
+// ── Making Requests & Asking for Advice ──
+{group:"Making Requests & Asking for Advice", lesson:14, pattern:"Vてください", meaning:"Please do V (polite request)", examples:[
+  {jp:"すみません、ここに名前を書いてください。", en:"Excuse me, please write your name here."}
+]},
+{group:"Making Requests & Asking for Advice", lesson:17, pattern:"Vないでください", meaning:"Please don't do V", examples:[
+  {jp:"写真を撮らないでください。", en:"Please don't take photos."}
+]},
+{group:"Making Requests & Asking for Advice", lesson:16, pattern:"Vかた", meaning:"How to do V", examples:[
+  {jp:"漢字の書き方を教えてください。", en:"Please teach me how to write kanji."}
+]},
+{group:"Making Requests & Asking for Advice", lesson:26, pattern:"んですが〜ていただけませんか", meaning:"Polite request, giving context first", examples:[
+  {jp:"荷物が多いんですが、手伝っていただけませんか。", en:"I have a lot of luggage — could you help me?"}
+]},
+{group:"Making Requests & Asking for Advice", lesson:26, pattern:"んですが〜たらいいですか", meaning:"Asking for advice, giving context first", examples:[
+  {jp:"日本語が上手じゃないんですが、どうしたらいいですか。", en:"My Japanese isn't good — what should I do?"}
+]},
+
+// ── Suggestions & Invitations ──
+{group:"Suggestions & Invitations", lesson:14, pattern:"Vましょうか", meaning:"Shall I / shall we do V?", examples:[
+  {jp:"荷物を持ちましょうか。", en:"Shall I carry your luggage?"}
+]},
+
+// ── Asking Permission & Prohibition ──
+{group:"Asking Permission & Prohibition", lesson:15, pattern:"Vてもいいですか", meaning:"Is it okay if I do V? (asking permission)", examples:[
+  {jp:"ここに座ってもいいですか。", en:"Is it okay if I sit here?"}
+]},
+{group:"Asking Permission & Prohibition", lesson:15, pattern:"Vてはいけません", meaning:"Must not do V (prohibition)", examples:[
+  {jp:"ここでたばこを吸ってはいけません。", en:"You must not smoke here."}
+]},
+
+// ── Obligation & Necessity ──
+{group:"Obligation & Necessity", lesson:17, pattern:"Vなければなりません", meaning:"Must do V (obligation)", examples:[
+  {jp:"パスポートを持って行かなければなりません。", en:"I must bring my passport."}
+]},
+{group:"Obligation & Necessity", lesson:17, pattern:"Vなくてもいいです", meaning:"Don't have to do V", examples:[
+  {jp:"きょうは残業しなくてもいいです。", en:"You don't have to work overtime today."}
+]},
+{group:"Obligation & Necessity", lesson:17, pattern:"まで vs までに", meaning:"until (continuous) vs by (deadline)", examples:[
+  {jp:"5時まで会社にいます。", en:"I'll be at the office until 5."},
+  {jp:"5時までに帰ってきてください。", en:"Please come back by 5."}
+]},
+
+// ── Talking About Ability & Hobbies ──
+{group:"Talking About Ability & Hobbies", lesson:18, pattern:"Nができます", meaning:"Can do N / N is possible", examples:[
+  {jp:"ドイツ語ができます。", en:"I can speak German."}
+]},
+{group:"Talking About Ability & Hobbies", lesson:18, pattern:"V(辞書形)ことができます", meaning:"Can do V / it is possible to do V", examples:[
+  {jp:"泳ぐことができます。", en:"I can swim."},
+  {jp:"日本語を話すことができます。", en:"I can speak Japanese."}
+]},
+{group:"Talking About Ability & Hobbies", lesson:18, pattern:"趣味は～です／V(辞書形)ことです", meaning:"My hobby is ~ / My hobby is doing V", examples:[
+  {jp:"趣味は写真を撮ることです。", en:"My hobby is taking photos."}
+]},
+{group:"Talking About Ability & Hobbies", lesson:27, pattern:"可能動詞（Group 1/2/3）", meaning:"Potential (can-do) verb form — an alternative to こと ができます", examples:[
+  {jp:"読みます→読める／食べます→食べられる／来ます→来られる", en:"Group 1 (u→e+る), Group 2 (drop ます+られる), irregular"},
+  {jp:"日本語が話せます。", en:"I can speak Japanese."}
+]},
+{group:"Talking About Ability & Hobbies", lesson:27, pattern:"見えます／聞こえます", meaning:"Can see / can hear (naturally, without effort) — contrast with ability form", examples:[
+  {jp:"ここから富士山が見えます。", en:"You can see Mt. Fuji from here."},
+  {jp:"となりの部屋から音楽が聞こえます。", en:"I can hear music from the next room."}
+]},
+
+// ── Describing Ongoing Actions, States & Habits ──
+{group:"Describing Ongoing Actions, States & Habits", lesson:14, pattern:"Vています（進行）", meaning:"Is/am/are doing V (progressive, happening now)", examples:[
+  {jp:"今、テレビを見ています。", en:"I'm watching TV right now."}
+]},
+{group:"Describing Ongoing Actions, States & Habits", lesson:15, pattern:"Vています（継続・状態）", meaning:"To be in a continuing state (knowing, living, owning, etc.)", examples:[
+  {jp:"わたしは大阪に住んでいます。", en:"I live in Osaka."},
+  {jp:"田中さんを知っていますか。", en:"Do you know Mr. Tanaka?"}
+]},
+{group:"Describing Ongoing Actions, States & Habits", lesson:28, pattern:"Vながら", meaning:"While doing V (two actions at once by the same person)", examples:[
+  {jp:"音楽を聞きながら、勉強します。", en:"I study while listening to music."}
+]},
+{group:"Describing Ongoing Actions, States & Habits", lesson:28, pattern:"Vています（習慣・日常）", meaning:"Habitual or routine action (ongoing pattern, not a one-time event)", examples:[
+  {jp:"毎朝ジョギングをしています。", en:"I go jogging every morning."}
+]},
+{group:"Describing Ongoing Actions, States & Habits", lesson:22, pattern:"着衣の動詞＋ています＋人", meaning:"Describing people by what they're wearing (using ている)", examples:[
+  {jp:"帽子をかぶっている人はロイさんです。", en:"The person wearing a hat is Roy."},
+  {jp:"眼鏡をかけている人はキムさんです。", en:"The person wearing glasses is Kim."}
+]},
+
+// ── Describing People, Things & Places ──
+{group:"Describing People, Things & Places", lesson:22, pattern:"文＋N（人・物・場所）", meaning:"[Sentence] + Noun — a clause modifying a noun (relative clause)", examples:[
+  {jp:"これは母が作ったケーキです。", en:"This is a cake my mother made."},
+  {jp:"あそこにいる人はスミスさんです。", en:"The person over there is Mr. Smith."}
+]},
+{group:"Describing People, Things & Places", lesson:22, pattern:"私が〜ところ／もの／時間は…です", meaning:"The place/thing/time that I ~ is ...", examples:[
+  {jp:"私が住んでいるところは京都です。", en:"The place I live is Kyoto."},
+  {jp:"朝ごはんを食べる時間がありません。", en:"I don't have time to eat breakfast."}
+]},
+{group:"Describing People, Things & Places", lesson:16, pattern:"Nは～がAdj", meaning:"As for N, its [part] is Adj (describing an attribute)", examples:[
+  {jp:"うさぎは耳が長いです。", en:"Rabbits have long ears."}
+]},
+{group:"Describing People, Things & Places", lesson:16, pattern:"いadjくて／なadjで", meaning:"Connecting two adjectives (and/because-like link)", examples:[
+  {jp:"この部屋は広くて、明るいです。", en:"This room is spacious and bright."},
+  {jp:"彼女は親切で、きれいです。", en:"She is kind and pretty."}
+]},
+
+// ── Asking Questions & Making Comparisons ──
+{group:"Asking Questions & Making Comparisons", lesson:16, pattern:"どちら／どれ／どのN／どんなN／どう", meaning:"Which (of two) / which (of many) / which N / what kind of N / how", examples:[
+  {jp:"コーヒーとお茶とどちらが好きですか。", en:"Which do you like better, coffee or tea?"},
+  {jp:"どんな music が好きですか。", en:"What kind of music do you like?"}
+]},
+
+// ── "If" — Conditionals ──
+{group:"“If” — Conditionals", lesson:25, pattern:"Vたら／いadjかったら／なadjだったら／Nだったら（仮定条件）", meaning:"If ~ (hypothetical condition, using た-form + ら)", examples:[
+  {jp:"お金があったら、旅行に行きたいです。", en:"If I had money, I'd like to travel."},
+  {jp:"暇だったら、手伝ってください。", en:"If you're free, please help me."}
+]},
+{group:"“If” — Conditionals", lesson:23, pattern:"V(辞書形)と", meaning:"Whenever ~ happens, ~ always follows (natural/automatic result)", examples:[
+  {jp:"お酒を飲むと、顔が赤くなります。", en:"Whenever I drink alcohol, my face turns red."},
+  {jp:"このボタンを押すと、切符が出ます。", en:"If you press this button, a ticket comes out."}
+]},
+{group:"“If” — Conditionals", lesson:25, pattern:"たら vs と vs ても の違い", meaning:"Comparing conditional forms: たら (hypothetical, any result), と (automatic/whenever), ても (despite, regardless)", examples:[
+  {jp:"熱があったら学校を休みます。／試験があっても学校を休みません。", en:"If I have a fever, I'll be absent. / Even if there's an exam, I won't be absent."}
+]},
+
+// ── "But / Even If" — Contrast & Concession ──
+{group:"“But / Even If” — Contrast & Concession", lesson:25, pattern:"Vても／いadjくても／なadjでも／Nでも", meaning:"Even if ~ (concessive — the result happens regardless)", examples:[
+  {jp:"雨が降っても、京都に行きます。", en:"Even if it rains, I'll go to Kyoto."},
+  {jp:"高くても、買います。", en:"Even if it's expensive, I'll buy it."}
+]},
+{group:"“But / Even If” — Contrast & Concession", lesson:27, pattern:"は（対比）／では・でも・からは・からも・にも・には", meaning:"Contrastive は, and place-based contrast particle combinations", examples:[
+  {jp:"東京は人が多いですが、田舎は静かです。", en:"Tokyo has many people, but the countryside is quiet."},
+  {jp:"大阪からは近いですが、東京からは遠いです。", en:"It's close from Osaka, but far from Tokyo."}
+]},
+
+// ── "When" — Time Clauses ──
+{group:"“When” — Time Clauses", lesson:23, pattern:"V(普通形)とき", meaning:"When ~ (at the time that)", examples:[
+  {jp:"外国に旅行するとき、パスポートが要ります。", en:"You need a passport when traveling abroad."},
+  {jp:"道が分からないとき、地図を見ます。", en:"I look at the map when I don't know the way."}
+]},
+{group:"“When” — Time Clauses", lesson:23, pattern:"いadj／なadjな／Nの＋とき", meaning:"When [adjective/noun state] — adjust adjective form before とき", examples:[
+  {jp:"眠いとき、コーヒーを飲みます。", en:"I drink coffee when I'm sleepy."},
+  {jp:"暇なとき、本を読みます。", en:"I read when I'm free."},
+  {jp:"病気のとき、病院に行きます。", en:"I go to the hospital when I'm sick."}
+]},
+
+// ── Sequencing: Before, After & In Advance ──
+{group:"Sequencing: Before, After & In Advance", lesson:16, pattern:"Vて、Vて、それに", meaning:"Sequential actions in order, plus an additional point", examples:[
+  {jp:"朝起きて、シャワーを浴びて、それに会社に行きます。", en:"I get up, take a shower, and then go to work."}
+]},
+{group:"Sequencing: Before, After & In Advance", lesson:16, pattern:"Vてから", meaning:"After doing V", examples:[
+  {jp:"手を洗ってから、ご飯を食べます。", en:"I eat after washing my hands."}
+]},
+{group:"Sequencing: Before, After & In Advance", lesson:18, pattern:"前に／N(期間)前に", meaning:"Before doing V / N (time period) ago", examples:[
+  {jp:"寝る前に本を読みます。", en:"I read a book before going to sleep."},
+  {jp:"3年前に日本に来ました。", en:"I came to Japan 3 years ago."}
+]},
+{group:"Sequencing: Before, After & In Advance", lesson:25, pattern:"Vたら（確定条件）", meaning:"After ~ happens (for sure) — confirmed sequence, not hypothetical", examples:[
+  {jp:"仕事が終わったら、うちへ帰ります。", en:"After work finishes, I'll go home."}
+]},
+{group:"Sequencing: Before, After & In Advance", lesson:30, pattern:"前に／までにVておきます", meaning:"Do V in advance (before / by a certain time)", examples:[
+  {jp:"旅行に行く前に、ホテルを予約しておきます。", en:"I'll book the hotel in advance before the trip."},
+  {jp:"9時までにレポートを送っておいてください。", en:"Please send the report in advance by 9 o'clock."}
+]},
+{group:"Sequencing: Before, After & In Advance", lesson:30, pattern:"たらVておきます", meaning:"Take an action in advance, once a condition is met", examples:[
+  {jp:"雨が降ったら、窓を閉めておきます。", en:"If it rains, I'll close the windows in advance."}
+]},
+
+// ── Giving & Receiving Favors ──
+{group:"Giving & Receiving Favors", lesson:24, pattern:"あげます／もらいます／くれます", meaning:"Give / receive / give-to-me (giving-receiving verbs)", examples:[
+  {jp:"わたしは彼にプレゼントをあげました。", en:"I gave him a present."},
+  {jp:"わたしは彼にプレゼントをもらいました。", en:"I received a present from him."},
+  {jp:"彼はわたしにプレゼントをくれました。", en:"He gave me a present."}
+]},
+{group:"Giving & Receiving Favors", lesson:24, pattern:"てあげます／てもらいます／てくれます", meaning:"Do a favor for someone / have someone do a favor for me", examples:[
+  {jp:"友達に日本語を教えてあげました。", en:"I taught my friend Japanese (as a favor)."},
+  {jp:"友達に駅まで送ってもらいました。", en:"I had my friend take me to the station."},
+  {jp:"友達が写真を撮ってくれました。", en:"My friend took a photo for me."}
+]},
+
+// ── Sharing Opinions, Guesses & Reported Speech ──
+{group:"Sharing Opinions, Guesses & Reported Speech", lesson:21, pattern:"普通形＋と思います（推量）", meaning:"I guess/think that ~ (plain form + と思います)", examples:[
+  {jp:"あした雪が降ると思います。", en:"I think it will snow tomorrow."},
+  {jp:"パンダだと思います。", en:"I guess it's a panda."}
+]},
+{group:"Sharing Opinions, Guesses & Reported Speech", lesson:21, pattern:"～についてどう思いますか", meaning:"What do you think about ~?", examples:[
+  {jp:"日本の生活についてどう思いますか。…おもしろいと思います。", en:"What do you think about life in Japan? — I think it's fun."}
+]},
+{group:"Sharing Opinions, Guesses & Reported Speech", lesson:21, pattern:"普通形＋と言います（間接引用）", meaning:"Said that ~ (indirect quotation)", examples:[
+  {jp:"父に留学したいと言いました。", en:"I told my dad I want to study abroad."}
+]},
+{group:"Sharing Opinions, Guesses & Reported Speech", lesson:21, pattern:"普通形＋でしょう？", meaning:"I bet ~, right? (seeking confirmation)", examples:[
+  {jp:"疲れたでしょう？", en:"You're tired, aren't you?"}
+]},
+
+// ── Explaining Yourself & Asking Why (んです) ──
+{group:"Explaining Yourself & Asking Why (んです)", lesson:26, pattern:"んです／んですか", meaning:"Explanatory / seeking explanation (softer, more conversational than です)", examples:[
+  {jp:"どうしてパーティーに来なかったんですか。…頭が痛かったんです。", en:"Why didn't you come to the party? — Because I had a headache."}
+]},
+{group:"Explaining Yourself & Asking Why (んです)", lesson:26, pattern:"どうしたんですか", meaning:"What's wrong? / What happened? (noticing something unusual)", examples:[
+  {jp:"どうしたんですか。顔色が悪いですよ。", en:"What's wrong? You look pale."}
+]},
+
+// ── Talking About Experience & Listing Activities ──
+{group:"Talking About Experience & Listing Activities", lesson:19, pattern:"V(た形)ことがあります", meaning:"Have done V before (experience)", examples:[
+  {jp:"富士山に登ったことがあります。", en:"I have climbed Mt. Fuji before."},
+  {jp:"相撲を見たことがありますか。", en:"Have you ever watched sumo?"}
+]},
+{group:"Talking About Experience & Listing Activities", lesson:19, pattern:"VたりVたりします", meaning:"Do things like V1 and V2 (among other things)", examples:[
+  {jp:"週末は洗濯をしたり、掃除をしたりしました。", en:"On the weekend I did things like laundry and cleaning."}
+]},
+
+// ── Describing Change ("Become") ──
+{group:"Describing Change (“Become”)", lesson:19, pattern:"いadjくなります／なadjになります／Nになります", meaning:"Become Adj / become N", examples:[
+  {jp:"春になると、暖かくなります。", en:"When spring comes, it becomes warm."},
+  {jp:"日本語が上手になりました。", en:"My Japanese has become skillful."}
+]},
+
+// ── Describing Results & States ──
+{group:"Describing Results & States", lesson:29, pattern:"自動詞／他動詞", meaning:"Intransitive vs transitive verb pairs (e.g. 開く／開ける)", examples:[
+  {jp:"ドアが開きます（自動詞）／ドアを開けます（他動詞）", en:"The door opens (by itself) / [someone] opens the door"}
+]},
+{group:"Describing Results & States", lesson:29, pattern:"NがV(自動詞)ています", meaning:"Describes a resultant state — something is currently in a state caused by an earlier event", examples:[
+  {jp:"窓が開いています。", en:"The window is open (as a result of being opened)."}
+]},
+{group:"Describing Results & States", lesson:29, pattern:"Vてしまいました／Vてしまいます", meaning:"Have completed / will complete an action — often with a nuance of regret or finality", examples:[
+  {jp:"財布を忘れてしまいました。", en:"I've gone and forgotten my wallet (regrettably)."},
+  {jp:"今日中にこの仕事をしてしまいます。", en:"I'll get this work finished within today."}
+]},
+{group:"Describing Results & States", lesson:30, pattern:"NがV(他動詞)てあります", meaning:"Something has been done (to N) for a purpose — a deliberate resultative state", examples:[
+  {jp:"テーブルにお皿が置いてあります。", en:"Plates have been set on the table (for a purpose, e.g. dinner)."}
+]},
+{group:"Describing Results & States", lesson:30, pattern:"NはもうV(他動詞)てあります", meaning:"N has already been prepared/done", examples:[
+  {jp:"晩ご飯はもう作ってあります。", en:"Dinner has already been made."}
+]},
+{group:"Describing Results & States", lesson:30, pattern:"そのままにしておきます", meaning:"Leave (something) as it is", examples:[
+  {jp:"ドアはそのままにしておいてください。", en:"Please leave the door as it is."}
+]},
+
+// ── Restriction & Only ──
+{group:"Restriction & Only", lesson:27, pattern:"しか〜ません", meaning:"Only ~ (emphasizes limitation, always with negative verb)", examples:[
+  {jp:"1,000円しかありません。", en:"I only have 1,000 yen."}
+]},
+
+// ── Listing Qualities & Reasons ──
+{group:"Listing Qualities & Reasons", lesson:28, pattern:"し…し…それに／だから", meaning:"Listing multiple qualities/reasons, plus an additional point or conclusion", examples:[
+  {jp:"この店は安いし、おいしいし、それに近いです。", en:"This restaurant is cheap, tasty, and on top of that, close by."}
+]},
+
+// ── Casual vs. Polite Speech ──
+{group:"Casual vs. Polite Speech", lesson:20, pattern:"丁寧形 vs 普通形", meaning:"Polite form vs plain/casual form — full conjugation reference", examples:[
+  {jp:"行きます／行く・行きません／行かない・行きました／行った・行きませんでした／行かなかった", en:"Verb: polite ↔ plain across present/past, affirmative/negative"},
+  {jp:"きれいです／きれいだ・きれいじゃありません／きれいじゃない", en:"な-adjective / noun: polite ↔ plain"},
+  {jp:"大きいです／大きい・大きくないです／大きくない", en:"い-adjective: polite ↔ plain"}
+]},
+{group:"Casual vs. Polite Speech", lesson:20, pattern:"普通体での会話（casual speech markers）", meaning:"Casual conversation: intonation replaces か, はい/いいえ→うん/ううん", examples:[
+  {jp:"もう映画を見た？…ううん、まだ。", en:"Have you watched the movie yet? — No, not yet. (casual)"}
+]},
+
+// ── Conjugation Reference Tables ──
+{group:"Conjugation Reference Tables", lesson:17, pattern:"ない形（辞書形から）", meaning:"Negative plain form of verbs — 3 groups", examples:[
+  {jp:"行きます → 行かない／食べます → 食べない／来ます → 来ない", en:"Group 1 (i→a+ない), Group 2 (drop ます+ない), irregular する→しない、来る→こない"}
+]},
+{group:"Conjugation Reference Tables", lesson:18, pattern:"辞書形", meaning:"Dictionary (plain present) form of verbs — 3 groups", examples:[
+  {jp:"飲みます→飲む／見ます→見る／します→する", en:"Group 1 (u-ending), Group 2/3 (drop ます, add る / irregular)"}
+]},
+{group:"Conjugation Reference Tables", lesson:19, pattern:"た形（辞書形から）", meaning:"Past plain form of verbs — 3 groups", examples:[
+  {jp:"書きます→書いた／食べます→食べた／来ます→来た", en:"Same conjugation groups as て-form"}
+]},
+];
+
+const container = document.getElementById('cardContainer');
+const searchInput = document.getElementById('search');
+const countEl = document.getElementById('count');
+const categoryFilterEl = document.getElementById('categoryFilter');
+
+// group (use-case) ordering by first appearance (matches the order groups are written above)
+const groupOrder = [];
+data.forEach(d => { if(!groupOrder.includes(d.group)) groupOrder.push(d.group); });
+
+let activeCategories = new Set(groupOrder);
+
+// Meta-clusters group the 22 use-case sections into a handful of visually
+// scannable themes, referencing groupOrder by index (order groups first appear in `data`).
+const clusterDefs = [
+  {label:"Requests, Suggestions & Permission", idx:[0,1,2,3]},
+  {label:"Ability, Habits & Description", idx:[4,5,6,7]},
+  {label:"Conditionals & Time", idx:[8,9,10,11]},
+  {label:"Social & Communication", idx:[12,13,14,20]},
+  {label:"Experience, Change & Results", idx:[15,16,17,18,19]},
+  {label:"Conjugation Reference", idx:[21]},
+];
+
+function renderCategoryFilter(){
+  categoryFilterEl.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.className = 'filter-panel-head';
+  head.innerHTML = `<span>Browse by use case</span>`;
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All use cases';
+  allBtn.className = 'chip-all-btn active';
+  allBtn.onclick = () => { activeCategories = new Set(groupOrder); render(); highlightFilterButtons(); };
+  head.appendChild(allBtn);
+  categoryFilterEl.appendChild(head);
+
+  clusterDefs.forEach(cluster => {
+    const wrap = document.createElement('div');
+    wrap.className = 'filter-cluster';
+    const label = document.createElement('div');
+    label.className = 'cluster-label';
+    label.textContent = cluster.label;
+    wrap.appendChild(label);
+    const row = document.createElement('div');
+    row.className = 'chip-row';
+    cluster.idx.forEach(i => {
+      const g = groupOrder[i];
+      const b = document.createElement('button');
+      b.className = 'chip active';
+      b.textContent = g;
+      b.dataset.group = g;
+      b.onclick = () => {
+        if(activeCategories.has(g) && activeCategories.size===1){
+          activeCategories = new Set(groupOrder);
+        } else {
+          activeCategories = new Set([g]);
+        }
+        render(); highlightFilterButtons();
+      };
+      row.appendChild(b);
+    });
+    wrap.appendChild(row);
+    categoryFilterEl.appendChild(wrap);
+  });
+}
+function highlightFilterButtons(){
+  const allActive = activeCategories.size === groupOrder.length;
+  categoryFilterEl.querySelector('.chip-all-btn').classList.toggle('active', allActive);
+  categoryFilterEl.querySelectorAll('.chip').forEach(b=>{
+    b.classList.toggle('active', allActive || (activeCategories.has(b.dataset.group) && activeCategories.size===1));
+  });
+}
+
+function render(){
+  const q = searchInput.value.trim().toLowerCase();
+  container.innerHTML = '';
+  let shown = 0;
+  groupOrder.forEach(group => {
+    if(!activeCategories.has(group)) return;
+    const items = data.filter(d => d.group === group && matchesQuery(d, q));
+    if(items.length === 0) return;
+    const h = document.createElement('div');
+    h.className = 'section-title';
+    h.textContent = group;
+    container.appendChild(h);
+    items.forEach(d => {
+      shown++;
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-head">
+          <div class="pattern">${escapeHtml(d.pattern)}</div>
+          <div class="lesson-tag">Lesson ${d.lesson}</div>
+        </div>
+        <div class="meaning">${escapeHtml(d.meaning)}</div>
+        <div class="examples">
+          ${d.examples.map(ex => `<div class="example"><div class="jp">${escapeHtml(ex.jp)}</div><div class="en">${escapeHtml(ex.en)}</div></div>`).join('')}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  });
+  countEl.textContent = shown + ' grammar point' + (shown===1?'':'s') + ' shown';
+}
+
+function matchesQuery(d, q){
+  if(!q) return true;
+  const hay = [d.pattern, d.meaning, ...d.examples.map(e=>e.jp+' '+e.en)].join(' ').toLowerCase();
+  return hay.includes(q);
+}
+
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+searchInput.addEventListener('input', () => { render(); renderLessonPage(); });
+renderCategoryFilter();
+render();
+
+// ───────────────────────── Lesson view (same data, grouped by lesson number) ─────────────────────────
+const lessonEl = document.getElementById('lessonCardContainer');
+const lessonCountEl = document.getElementById('lessonCount');
+const lessonFilterEl = document.getElementById('lessonFilter');
+
+const lessonNumbers = [...new Set(data.map(d => d.lesson))].sort((a,b) => a-b);
+let activeLessons = new Set(lessonNumbers);
+
+// Chunk lesson numbers into rows of ~6 for a scannable chip layout
+const lessonClusterDefs = [];
+for(let i=0; i<lessonNumbers.length; i+=6){
+  const chunk = lessonNumbers.slice(i, i+6);
+  lessonClusterDefs.push({label:`Lessons ${chunk[0]}–${chunk[chunk.length-1]}`, nums:chunk});
+}
+
+function renderLessonFilter(){
+  lessonFilterEl.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.className = 'filter-panel-head';
+  head.innerHTML = `<span>Browse by lesson</span>`;
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All lessons';
+  allBtn.className = 'chip-all-btn active';
+  allBtn.onclick = () => { activeLessons = new Set(lessonNumbers); renderLessonPage(); highlightLessonFilterButtons(); };
+  head.appendChild(allBtn);
+  lessonFilterEl.appendChild(head);
+
+  lessonClusterDefs.forEach(cluster => {
+    const wrap = document.createElement('div');
+    wrap.className = 'filter-cluster';
+    const label = document.createElement('div');
+    label.className = 'cluster-label';
+    label.textContent = cluster.label;
+    wrap.appendChild(label);
+    const row = document.createElement('div');
+    row.className = 'chip-row';
+    cluster.nums.forEach(num => {
+      const b = document.createElement('button');
+      b.className = 'chip active';
+      b.textContent = 'Lesson ' + num;
+      b.dataset.lesson = num;
+      b.onclick = () => {
+        if(activeLessons.has(num) && activeLessons.size===1){
+          activeLessons = new Set(lessonNumbers);
+        } else {
+          activeLessons = new Set([num]);
+        }
+        renderLessonPage(); highlightLessonFilterButtons();
+      };
+      row.appendChild(b);
+    });
+    wrap.appendChild(row);
+    lessonFilterEl.appendChild(wrap);
+  });
+}
+function highlightLessonFilterButtons(){
+  const allActive = activeLessons.size === lessonNumbers.length;
+  lessonFilterEl.querySelector('.chip-all-btn').classList.toggle('active', allActive);
+  lessonFilterEl.querySelectorAll('.chip').forEach(b=>{
+    const num = Number(b.dataset.lesson);
+    b.classList.toggle('active', allActive || (activeLessons.has(num) && activeLessons.size===1));
+  });
+}
+
+function renderLessonPage(){
+  const q = searchInput.value.trim().toLowerCase();
+  lessonEl.innerHTML = '';
+  let shown = 0;
+  lessonNumbers.forEach(num => {
+    if(!activeLessons.has(num)) return;
+    const items = data.filter(d => d.lesson === num && matchesQuery(d, q));
+    if(items.length === 0) return;
+    const h = document.createElement('div');
+    h.className = 'section-title';
+    h.textContent = 'Lesson ' + num;
+    lessonEl.appendChild(h);
+    items.forEach(d => {
+      shown++;
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-head">
+          <div class="pattern">${escapeHtml(d.pattern)}</div>
+          <div class="lesson-tag">${escapeHtml(d.group)}</div>
+        </div>
+        <div class="meaning">${escapeHtml(d.meaning)}</div>
+        <div class="examples">
+          ${d.examples.map(ex => `<div class="example"><div class="jp">${escapeHtml(ex.jp)}</div><div class="en">${escapeHtml(ex.en)}</div></div>`).join('')}
+        </div>
+      `;
+      lessonEl.appendChild(card);
+    });
+  });
+  lessonCountEl.textContent = shown + ' grammar point' + (shown===1?'':'s') + ' shown';
+}
+
+renderLessonFilter();
+renderLessonPage();
+
+// ───────────────────────── Tabs ─────────────────────────
+function showPage(page){
+  document.getElementById('referencePage').classList.toggle('active', page==='reference');
+  document.getElementById('lessonPage').classList.toggle('active', page==='lesson');
+  document.getElementById('conjugationPage').classList.toggle('active', page==='conjugation');
+  document.getElementById('vocabPage').classList.toggle('active', page==='vocab');
+  document.getElementById('quizPage').classList.toggle('active', page==='quiz');
+  document.getElementById('tabRef').classList.toggle('active', page==='reference');
+  document.getElementById('tabLesson').classList.toggle('active', page==='lesson');
+  document.getElementById('tabConj').classList.toggle('active', page==='conjugation');
+  document.getElementById('tabVocab').classList.toggle('active', page==='vocab');
+  document.getElementById('tabQuiz').classList.toggle('active', page==='quiz');
+}
+
+// ───────────────────────── Conjugation rules (verb groups I/II/III, い-adj, な-adj) ─────────────────────────
+// Each group starts from the ます／です form (the polite form learners meet first),
+// then shows how it maps to each short (plain) form, across several example words.
+const conjugationData = [
+  {
+    title: "Verb Group I (う-verbs / godan)",
+    desc: "Drop ます, then shift the い-row stem to match each ending: う-row for the dictionary form, あ-row for ない, and the sound-change rule for て／た (く→いて／いた, ぐ→いで／いだ, う・つ・る→って／った, ぬ・ぶ・む→んで／んだ, す→して／した).",
+    headers: ["ます形 (starting point)", "Meaning", "辞書形", "ない形", "て形", "た形", "なかった形"],
+    rows: [
+      ["書きます", "to write", "書く", "書かない", "書いて", "書いた", "書かなかった"],
+      ["話します", "to speak", "話す", "話さない", "話して", "話した", "話さなかった"],
+      ["読みます", "to read", "読む", "読まない", "読んで", "読んだ", "読まなかった"],
+      ["買います", "to buy", "買う", "買わない", "買って", "買った", "買わなかった"],
+      ["待ちます", "to wait", "待つ", "待たない", "待って", "待った", "待たなかった"],
+      ["帰ります", "to go home", "帰る", "帰らない", "帰って", "帰った", "帰らなかった"],
+    ],
+  },
+  {
+    title: "Verb Group II (る-verbs / ichidan)",
+    desc: "Drop ます, then just attach the ending directly — no sound changes needed. (Dictionary form: drop ます + る.)",
+    headers: ["ます形 (starting point)", "Meaning", "辞書形", "ない形", "て形", "た形", "なかった形"],
+    rows: [
+      ["食べます", "to eat", "食べる", "食べない", "食べて", "食べた", "食べなかった"],
+      ["見ます", "to see / watch", "見る", "見ない", "見て", "見た", "見なかった"],
+      ["起きます", "to get up", "起きる", "起きない", "起きて", "起きた", "起きなかった"],
+      ["教えます", "to teach", "教える", "教えない", "教えて", "教えた", "教えなかった"],
+      ["借ります", "to borrow", "借りる", "借りない", "借りて", "借りた", "借りなかった"],
+    ],
+  },
+  {
+    title: "Verb Group III (irregular)",
+    desc: "Only two true irregular verbs in Japanese — plus any verb built on する (like 勉強する). Just memorize these; they don't follow a stem rule.",
+    headers: ["ます形 (starting point)", "Meaning", "辞書形", "ない形", "て形", "た形", "なかった形"],
+    rows: [
+      ["します", "to do", "する", "しない", "して", "した", "しなかった"],
+      ["来ます (きます)", "to come", "来る (くる)", "来ない (こない)", "来て (きて)", "来た (きた)", "来なかった (こなかった)"],
+      ["勉強します", "to study", "勉強する", "勉強しない", "勉強して", "勉強した", "勉強しなかった"],
+      ["結婚します", "to get married", "結婚する", "結婚しない", "結婚して", "結婚した", "結婚しなかった"],
+    ],
+  },
+  {
+    title: "い-Adjectives",
+    desc: "Drop です, then drop the final い before attaching each ending: くない (negative), くて (linking), かった (past), くなかった (past negative). Special case: いい (\"good\") irregularly becomes よ- in every form except plain present.",
+    headers: ["-です (starting point)", "Meaning", "普通形", "ない形", "て形", "た形", "なかった形"],
+    rows: [
+      ["高いです", "expensive / tall", "高い", "高くない", "高くて", "高かった", "高くなかった"],
+      ["忙しいです", "busy", "忙しい", "忙しくない", "忙しくて", "忙しかった", "忙しくなかった"],
+      ["新しいです", "new", "新しい", "新しくない", "新しくて", "新しかった", "新しくなかった"],
+      ["おいしいです", "delicious", "おいしい", "おいしくない", "おいしくて", "おいしかった", "おいしくなかった"],
+      ["いいです", "good (irregular)", "いい", "よくない", "よくて", "よかった", "よくなかった"],
+    ],
+  },
+  {
+    title: "な-Adjectives & Nouns",
+    desc: "Both conjugate through だ (the plain copula), the same as each other: だ (present), じゃない (negative), で (linking), だった (past), じゃなかった (past negative).",
+    headers: ["-です (starting point)", "Meaning", "普通形", "ない形", "て形", "た形", "なかった形"],
+    rows: [
+      ["きれいです", "pretty", "きれいだ", "きれいじゃない", "きれいで", "きれいだった", "きれいじゃなかった"],
+      ["静かです", "quiet", "静かだ", "静かじゃない", "静かで", "静かだった", "静かじゃなかった"],
+      ["有名です", "famous", "有名だ", "有名じゃない", "有名で", "有名だった", "有名じゃなかった"],
+      ["学生です", "(is a) student", "学生だ", "学生じゃない", "学生で", "学生だった", "学生じゃなかった"],
+      ["先生です", "(is a) teacher", "先生だ", "先生じゃない", "先生で", "先生だった", "先生じゃなかった"],
+    ],
+  },
+];
+
+function renderConjugationPage(){
+  const el = document.getElementById('conjugationContainer');
+  el.innerHTML = '';
+  conjugationData.forEach(group => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-head"><div class="pattern" style="font-size:16.5px;">${escapeHtml(group.title)}</div></div>
+      <div class="conj-group-desc">${escapeHtml(group.desc)}</div>
+      <div class="conj-table-wrap">
+        <table class="conj-table">
+          <thead><tr>${group.headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}</tr></thead>
+          <tbody>
+            ${group.rows.map(r => `
+              <tr>
+                <td class="conj-jp conj-start">${escapeHtml(r[0])}</td>
+                <td class="en">${escapeHtml(r[1])}</td>
+                ${r.slice(2).map(c => `<td class="conj-jp">${escapeHtml(c)}</td>`).join('')}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+    el.appendChild(card);
+  });
+}
+renderConjugationPage();
+
+// ───────────────────────── Vocabulary flashcards (extracted from lesson notes) ─────────────────────────
+const vocabData = [
+  {"lesson": 16, "jp": "乗ります", "reading": "のります", "en": "ride, get on [a train]"},
+  {"lesson": 16, "jp": "降ります", "reading": "おります", "en": "get off [a train]"},
+  {"lesson": 16, "jp": "乗り換えます", "reading": "のりかえます", "en": "change trains"},
+  {"lesson": 16, "jp": "浴びます", "reading": "あびます", "en": "take [a shower]"},
+  {"lesson": 16, "jp": "入れます", "reading": "いれます", "en": "put in, insert"},
+  {"lesson": 16, "jp": "出します", "reading": "だします", "en": "take out, withdraw"},
+  {"lesson": 16, "jp": "入ります", "reading": "はいります", "en": "enter [a university]"},
+  {"lesson": 16, "jp": "出ます", "reading": "でます", "en": "graduate from [university]"},
+  {"lesson": 16, "jp": "辞めます", "reading": "やめます", "en": "quit [a company]"},
+  {"lesson": 16, "jp": "押します", "reading": "おします", "en": "push, press"},
+  {"lesson": 16, "jp": "若い", "reading": "わかい", "en": "young"},
+  {"lesson": 16, "jp": "長い", "reading": "ながい", "en": "long"},
+  {"lesson": 16, "jp": "短い", "reading": "みじかい", "en": "short"},
+  {"lesson": 16, "jp": "明るい", "reading": "あかるい", "en": "bright"},
+  {"lesson": 16, "jp": "暗い", "reading": "くらい", "en": "dark"},
+  {"lesson": 16, "jp": "背が高い", "reading": "せがたかい", "en": "tall (referring to a person)"},
+  {"lesson": 16, "jp": "体", "reading": "からだ", "en": "body"},
+  {"lesson": 16, "jp": "頭", "reading": "あたま", "en": "head"},
+  {"lesson": 16, "jp": "髪", "reading": "かみ", "en": "hair"},
+  {"lesson": 16, "jp": "顔", "reading": "かお", "en": "face"},
+  {"lesson": 16, "jp": "目", "reading": "め", "en": "eye"},
+  {"lesson": 16, "jp": "耳", "reading": "みみ", "en": "ear"},
+  {"lesson": 16, "jp": "口", "reading": "くち", "en": "mouth"},
+  {"lesson": 16, "jp": "歯", "reading": "は", "en": "tooth"},
+  {"lesson": 16, "jp": "お腹", "reading": "おなか", "en": "stomach"},
+  {"lesson": 16, "jp": "足", "reading": "あし", "en": "foot, leg"},
+  {"lesson": 16, "jp": "ジョギング", "reading": "", "en": "jogging"},
+  {"lesson": 16, "jp": "お寺", "reading": "おてら", "en": "temple"},
+  {"lesson": 16, "jp": "神社", "reading": "じんじゃ", "en": "shrine"},
+  {"lesson": 16, "jp": "留学生", "reading": "りゅうがくせい", "en": "foreign student"},
+  {"lesson": 17, "jp": "覚えます", "reading": "おぼえます", "en": "remember"},
+  {"lesson": 17, "jp": "忘れます", "reading": "わすれます", "en": "forget"},
+  {"lesson": 17, "jp": "なくします", "reading": "", "en": "lose"},
+  {"lesson": 17, "jp": "出します", "reading": "だします", "en": "hand in [a report]"},
+  {"lesson": 17, "jp": "払います", "reading": "はらいます", "en": "pay"},
+  {"lesson": 17, "jp": "出かけます", "reading": "でかけます", "en": "go out"},
+  {"lesson": 17, "jp": "返します", "reading": "かえします", "en": "return"},
+  {"lesson": 17, "jp": "脱ぎます", "reading": "ぬぎます", "en": "take off"},
+  {"lesson": 17, "jp": "持って行きます", "reading": "もっていきます", "en": "take (something)"},
+  {"lesson": 17, "jp": "持って来ます", "reading": "もってきます", "en": "bring (something)"},
+  {"lesson": 17, "jp": "心配します", "reading": "しんぱいします", "en": "worry"},
+  {"lesson": 17, "jp": "残業します", "reading": "ざんぎょうします", "en": "work overtime"},
+  {"lesson": 17, "jp": "出張します", "reading": "しゅっちょうします", "en": "go on a business trip"},
+  {"lesson": 17, "jp": "飲みます", "reading": "のみます", "en": "take [medicine]"},
+  {"lesson": 17, "jp": "入ります", "reading": "はいります", "en": "take [a bath]"},
+  {"lesson": 17, "jp": "大切", "reading": "たいせつ", "en": "important, precious"},
+  {"lesson": 17, "jp": "大丈夫", "reading": "だいじょうぶ", "en": "all right"},
+  {"lesson": 17, "jp": "危ない", "reading": "あぶない", "en": "dangerous"},
+  {"lesson": 17, "jp": "問題", "reading": "もんだい", "en": "question, problem, trouble"},
+  {"lesson": 17, "jp": "答え", "reading": "こたえ", "en": "answer"},
+  {"lesson": 17, "jp": "風邪", "reading": "かぜ", "en": "cold"},
+  {"lesson": 17, "jp": "熱", "reading": "ねつ", "en": "fever"},
+  {"lesson": 17, "jp": "病気", "reading": "びょうき", "en": "illness, disease"},
+  {"lesson": 17, "jp": "薬", "reading": "くすり", "en": "medicine"},
+  {"lesson": 17, "jp": "上着", "reading": "うわぎ", "en": "jacket"},
+  {"lesson": 17, "jp": "下着", "reading": "したぎ", "en": "underwear"},
+  {"lesson": 18, "jp": "できます", "reading": "", "en": "be able to, can"},
+  {"lesson": 18, "jp": "洗います", "reading": "あらいます", "en": "wash"},
+  {"lesson": 18, "jp": "弾きます", "reading": "ひきます", "en": "play [piano, guitar, etc.]"},
+  {"lesson": 18, "jp": "歌います", "reading": "うたいます", "en": "sing"},
+  {"lesson": 18, "jp": "集めます", "reading": "あつめます", "en": "collect, gather"},
+  {"lesson": 18, "jp": "捨てます", "reading": "すてます", "en": "throw away"},
+  {"lesson": 18, "jp": "換えます", "reading": "かえます", "en": "exchange"},
+  {"lesson": 18, "jp": "運転します", "reading": "うんてんします", "en": "drive"},
+  {"lesson": 18, "jp": "予約します", "reading": "よやくします", "en": "reserve, book"},
+  {"lesson": 18, "jp": "見学します", "reading": "けんがくします", "en": "visit a place for study"},
+  {"lesson": 18, "jp": "現金", "reading": "げんきん", "en": "cash"},
+  {"lesson": 18, "jp": "趣味", "reading": "しゅみ", "en": "hobby"},
+  {"lesson": 18, "jp": "日記", "reading": "にっき", "en": "diary"},
+  {"lesson": 18, "jp": "お祈り", "reading": "おいのり", "en": "pray"},
+  {"lesson": 18, "jp": "課長", "reading": "かちょう", "en": "section chief"},
+  {"lesson": 18, "jp": "部長", "reading": "ぶちょう", "en": "department chief"},
+  {"lesson": 18, "jp": "社長", "reading": "しゃちょう", "en": "president of a company"},
+  {"lesson": 18, "jp": "動物", "reading": "どうぶつ", "en": "animal"},
+  {"lesson": 19, "jp": "登ります", "reading": "のぼります", "en": "climb [a mountain]"},
+  {"lesson": 19, "jp": "泊まります", "reading": "とまります", "en": "stay [at a hotel]"},
+  {"lesson": 19, "jp": "掃除します", "reading": "そうじします", "en": "clean (a room)"},
+  {"lesson": 19, "jp": "洗濯します", "reading": "せんたくします", "en": "wash (clothes)"},
+  {"lesson": 19, "jp": "練習", "reading": "れんしゅう", "en": "practice"},
+  {"lesson": 19, "jp": "なります", "reading": "", "en": "become"},
+  {"lesson": 19, "jp": "眠い", "reading": "ねむい", "en": "sleepy"},
+  {"lesson": 19, "jp": "強い", "reading": "つよい", "en": "strong"},
+  {"lesson": 19, "jp": "弱い", "reading": "よわい", "en": "weak"},
+  {"lesson": 19, "jp": "調子がいい", "reading": "ちょうしがいい", "en": "be in good condition"},
+  {"lesson": 19, "jp": "調子が悪い", "reading": "ちょうしがわるい", "en": "be in bad condition"},
+  {"lesson": 19, "jp": "ダイエット", "reading": "", "en": "diet"},
+  {"lesson": 19, "jp": "無理", "reading": "むり", "en": "impossible"},
+  {"lesson": 19, "jp": "体にいい", "reading": "からだにいい", "en": "good for one's health"},
+  {"lesson": 20, "jp": "要ります", "reading": "いります", "en": "need [a visa]"},
+  {"lesson": 20, "jp": "調べます", "reading": "しらべます", "en": "check, investigate"},
+  {"lesson": 20, "jp": "直します", "reading": "なおします", "en": "repair [a bicycle]; correct [an answer]"},
+  {"lesson": 20, "jp": "修理します", "reading": "しゅうりします", "en": "repair"},
+  {"lesson": 20, "jp": "電話します", "reading": "でんわします", "en": "call"},
+  {"lesson": 20, "jp": "言葉", "reading": "ことば", "en": "word, language"},
+  {"lesson": 20, "jp": "お腹いっぱい", "reading": "おなかいっぱい", "en": "I'm full."},
+  {"lesson": 21, "jp": "思います", "reading": "おもいます", "en": "think"},
+  {"lesson": 21, "jp": "言います", "reading": "いいます", "en": "say"},
+  {"lesson": 21, "jp": "足ります", "reading": "たります", "en": "be enough"},
+  {"lesson": 21, "jp": "勝ちます", "reading": "かちます", "en": "win"},
+  {"lesson": 21, "jp": "負けます", "reading": "まけます", "en": "lose"},
+  {"lesson": 21, "jp": "あります", "reading": "", "en": "be held [a festival]"},
+  {"lesson": 21, "jp": "役に立ちます", "reading": "やくにたちます", "en": "be useful"},
+  {"lesson": 21, "jp": "不便", "reading": "ふべん", "en": "inconvenient"},
+  {"lesson": 21, "jp": "すごい", "reading": "", "en": "awful, amazing"},
+  {"lesson": 21, "jp": "試合", "reading": "しあい", "en": "game, match"},
+  {"lesson": 21, "jp": "アルバイト", "reading": "", "en": "part-time job"},
+  {"lesson": 21, "jp": "交通", "reading": "こうつう", "en": "transportation"},
+  {"lesson": 22, "jp": "着ます", "reading": "きます", "en": "put on [a shirt]"},
+  {"lesson": 22, "jp": "履きます", "reading": "はきます", "en": "put on [pants]"},
+  {"lesson": 22, "jp": "かぶります", "reading": "", "en": "put on [a hat]"},
+  {"lesson": 22, "jp": "かけます", "reading": "", "en": "put on [glasses]"},
+  {"lesson": 22, "jp": "生まれます", "reading": "うまれます", "en": "to be born"},
+  {"lesson": 22, "jp": "コート", "reading": "", "en": "coat"},
+  {"lesson": 22, "jp": "スーツ", "reading": "", "en": "suit"},
+  {"lesson": 22, "jp": "セーター", "reading": "", "en": "sweater"},
+  {"lesson": 22, "jp": "帽子", "reading": "ぼうし", "en": "hat, cap"},
+  {"lesson": 22, "jp": "眼鏡", "reading": "めがね", "en": "glasses"},
+  {"lesson": 22, "jp": "アパート", "reading": "", "en": "apartment"},
+  {"lesson": 22, "jp": "おめでとう[ございます]", "reading": "", "en": "congratulations"},
+  {"lesson": 23, "jp": "聞きます", "reading": "ききます", "en": "ask [the teacher]"},
+  {"lesson": 23, "jp": "回します", "reading": "まわします", "en": "turn"},
+  {"lesson": 23, "jp": "引きます", "reading": "ひきます", "en": "pull"},
+  {"lesson": 23, "jp": "変えます", "reading": "かえます", "en": "change"},
+  {"lesson": 23, "jp": "触ります", "reading": "さわります", "en": "touch"},
+  {"lesson": 23, "jp": "出ます", "reading": "でます", "en": "come out"},
+  {"lesson": 23, "jp": "動きます", "reading": "うごきます", "en": "move, work"},
+  {"lesson": 23, "jp": "歩きます", "reading": "あるきます", "en": "walk"},
+  {"lesson": 23, "jp": "渡ります", "reading": "わたります", "en": "cross"},
+  {"lesson": 23, "jp": "気をつけます", "reading": "きをつけます", "en": "pay attention"},
+  {"lesson": 23, "jp": "引っ越しします", "reading": "ひっこしします", "en": "move (house)"},
+  {"lesson": 23, "jp": "電気屋", "reading": "でんきや", "en": "electrician"},
+  {"lesson": 23, "jp": "音", "reading": "おと", "en": "sound"},
+  {"lesson": 23, "jp": "機械", "reading": "きかい", "en": "machine"},
+  {"lesson": 23, "jp": "故障", "reading": "こしょう", "en": "break down"},
+  {"lesson": 23, "jp": "道", "reading": "みち", "en": "road, way"},
+  {"lesson": 23, "jp": "交差点", "reading": "こうさてん", "en": "crossroad"},
+  {"lesson": 23, "jp": "信号", "reading": "しんごう", "en": "traffic light"},
+  {"lesson": 23, "jp": "角", "reading": "かど", "en": "corner"},
+  {"lesson": 23, "jp": "橋", "reading": "はし", "en": "bridge"},
+  {"lesson": 23, "jp": "駐車場", "reading": "ちゅうしゃじょう", "en": "parking lot"},
+  {"lesson": 23, "jp": "お正月", "reading": "おしょうがつ", "en": "New Year's Day"},
+  {"lesson": 23, "jp": "建物", "reading": "たてもの", "en": "building"},
+  {"lesson": 24, "jp": "くれます", "reading": "", "en": "give (me)"},
+  {"lesson": 24, "jp": "連れて行きます", "reading": "つれていきます", "en": "take (someone)"},
+  {"lesson": 24, "jp": "連れて来ます", "reading": "つれてきます", "en": "bring (someone)"},
+  {"lesson": 24, "jp": "送ります", "reading": "おくります", "en": "send (someone)"},
+  {"lesson": 24, "jp": "紹介します", "reading": "しょうかいします", "en": "introduce"},
+  {"lesson": 24, "jp": "案内します", "reading": "あんないします", "en": "show around"},
+  {"lesson": 24, "jp": "説明します", "reading": "せつめいします", "en": "explain"},
+  {"lesson": 24, "jp": "淹れます", "reading": "いれます", "en": "make [coffee]"},
+  {"lesson": 24, "jp": "おじいちゃん", "reading": "", "en": "grandfather"},
+  {"lesson": 24, "jp": "おじいさん", "reading": "", "en": "old man"},
+  {"lesson": 24, "jp": "おばあちゃん", "reading": "", "en": "grandmother"},
+  {"lesson": 24, "jp": "おばあさん", "reading": "", "en": "old woman"},
+  {"lesson": 24, "jp": "お菓子", "reading": "おかし", "en": "sweets, snacks"},
+  {"lesson": 24, "jp": "お弁当", "reading": "おべんとう", "en": "lunch box"},
+  {"lesson": 25, "jp": "考えます", "reading": "かんがえます", "en": "think, consider"},
+  {"lesson": 25, "jp": "着きます", "reading": "つきます", "en": "arrive"},
+  {"lesson": 25, "jp": "留学します", "reading": "りゅうがくします", "en": "stay abroad"},
+  {"lesson": 25, "jp": "取ります", "reading": "とります", "en": "grow old [年を取ります]"},
+  {"lesson": 25, "jp": "田舎", "reading": "いなか", "en": "countryside, hometown"},
+  {"lesson": 25, "jp": "大使館", "reading": "たいしかん", "en": "embassy"},
+  {"lesson": 25, "jp": "転勤", "reading": "てんきん", "en": "transfer"},
+  {"lesson": 25, "jp": "頑張ります", "reading": "がんばります", "en": "do one's best"},
+  {"lesson": 26, "jp": "見ます", "reading": "みます", "en": "check"},
+  {"lesson": 26, "jp": "診ます", "reading": "みます", "en": "check (medically)"},
+  {"lesson": 26, "jp": "探します", "reading": "さがします", "en": "look for"},
+  {"lesson": 26, "jp": "捜します", "reading": "さがします", "en": "search"},
+  {"lesson": 26, "jp": "遅れます", "reading": "おくれます", "en": "be late"},
+  {"lesson": 26, "jp": "間に合います", "reading": "まにあいます", "en": "be in time"},
+  {"lesson": 26, "jp": "参加します", "reading": "さんかします", "en": "attend"},
+  {"lesson": 26, "jp": "申し込みます", "reading": "もうしこみます", "en": "apply for, enter for"},
+  {"lesson": 26, "jp": "都合がいい", "reading": "つごうがいい", "en": "convenient"},
+  {"lesson": 26, "jp": "都合が悪い", "reading": "つごうがわるい", "en": "inconvenient"},
+  {"lesson": 26, "jp": "気分がいい", "reading": "きぶんがいい", "en": "feel well"},
+  {"lesson": 26, "jp": "気分が悪い", "reading": "きぶんがわるい", "en": "feel ill"},
+  {"lesson": 26, "jp": "柔道", "reading": "じゅうどう", "en": "judo"},
+  {"lesson": 26, "jp": "運動会", "reading": "うんどうかい", "en": "sports day"},
+  {"lesson": 26, "jp": "場所", "reading": "ばしょ", "en": "place"},
+  {"lesson": 26, "jp": "ボランティア", "reading": "", "en": "volunteer"},
+  {"lesson": 26, "jp": "片付きます", "reading": "かたづきます", "en": "be put in order"},
+  {"lesson": 26, "jp": "ごみ", "reading": "", "en": "garbage, trash, dust"},
+  {"lesson": 26, "jp": "出します", "reading": "だします", "en": "put out [the trash]"},
+  {"lesson": 26, "jp": "燃えます", "reading": "もえます", "en": "burn"},
+  {"lesson": 26, "jp": "置き場", "reading": "おきば", "en": "place where something is put"},
+  {"lesson": 26, "jp": "瓶", "reading": "びん", "en": "bottle"},
+  {"lesson": 26, "jp": "缶", "reading": "かん", "en": "can"},
+  {"lesson": 26, "jp": "お湯", "reading": "おゆ", "en": "hot water"},
+  {"lesson": 26, "jp": "ガス", "reading": "", "en": "gas"},
+  {"lesson": 27, "jp": "飼います", "reading": "かいます", "en": "keep (a pet)"},
+  {"lesson": 27, "jp": "建てます", "reading": "たてます", "en": "build"},
+  {"lesson": 27, "jp": "走ります", "reading": "はしります", "en": "run, drive"},
+  {"lesson": 27, "jp": "取ります", "reading": "とります", "en": "take [a holiday]"},
+  {"lesson": 27, "jp": "見えます", "reading": "みえます", "en": "can be seen"},
+  {"lesson": 27, "jp": "聞こえます", "reading": "きこえます", "en": "can be heard"},
+  {"lesson": 27, "jp": "できます", "reading": "", "en": "be made [a convenience store]"},
+  {"lesson": 27, "jp": "開きます", "reading": "ひらきます", "en": "open [a class]"},
+  {"lesson": 27, "jp": "ペット", "reading": "", "en": "pet"},
+  {"lesson": 27, "jp": "鳥", "reading": "とり", "en": "bird"},
+  {"lesson": 27, "jp": "声", "reading": "こえ", "en": "voice"},
+  {"lesson": 27, "jp": "波", "reading": "なみ", "en": "wave"},
+  {"lesson": 27, "jp": "花火", "reading": "はなび", "en": "fireworks"},
+  {"lesson": 27, "jp": "景色", "reading": "けしき", "en": "scenery, view"},
+  {"lesson": 27, "jp": "昔", "reading": "むかし", "en": "old days"},
+  {"lesson": 27, "jp": "道具", "reading": "どうぐ", "en": "tool"},
+  {"lesson": 27, "jp": "クリーニング", "reading": "", "en": "cleaning, laundry"},
+  {"lesson": 27, "jp": "マンション", "reading": "", "en": "condominium"},
+  {"lesson": 27, "jp": "台所", "reading": "だいどころ", "en": "kitchen"},
+  {"lesson": 27, "jp": "本棚", "reading": "ほんだな", "en": "bookshelf"},
+  {"lesson": 28, "jp": "踊ります", "reading": "おどります", "en": "dance"},
+  {"lesson": 28, "jp": "噛みます", "reading": "かみます", "en": "chew, bite"},
+  {"lesson": 28, "jp": "選びます", "reading": "えらびます", "en": "choose"},
+  {"lesson": 28, "jp": "違います", "reading": "ちがいます", "en": "be different"},
+  {"lesson": 28, "jp": "通います", "reading": "かよいます", "en": "go to and from [school]"},
+  {"lesson": 28, "jp": "メモします", "reading": "", "en": "take a memo"},
+  {"lesson": 28, "jp": "真面目", "reading": "まじめ", "en": "serious"},
+  {"lesson": 28, "jp": "熱心", "reading": "ねっしん", "en": "earnest"},
+  {"lesson": 28, "jp": "優しい", "reading": "やさしい", "en": "gentle, kind"},
+  {"lesson": 28, "jp": "偉い", "reading": "えらい", "en": "great"},
+  {"lesson": 28, "jp": "ちょうどいい", "reading": "", "en": "proper, just right"},
+  {"lesson": 28, "jp": "習慣", "reading": "しゅうかん", "en": "custom"},
+  {"lesson": 28, "jp": "形", "reading": "かたち", "en": "form, shape"},
+  {"lesson": 28, "jp": "色", "reading": "いろ", "en": "color"},
+  {"lesson": 28, "jp": "味", "reading": "あじ", "en": "taste"},
+  {"lesson": 28, "jp": "ガム", "reading": "", "en": "chewing gum"},
+  {"lesson": 28, "jp": "品物", "reading": "しなもの", "en": "goods"},
+  {"lesson": 28, "jp": "値段", "reading": "ねだん", "en": "price"},
+  {"lesson": 28, "jp": "給料", "reading": "きゅうりょう", "en": "salary"},
+  {"lesson": 28, "jp": "ボーナス", "reading": "", "en": "bonus"},
+  {"lesson": 28, "jp": "番組", "reading": "ばんぐみ", "en": "program"},
+  {"lesson": 28, "jp": "ドラマ", "reading": "", "en": "drama"},
+  {"lesson": 28, "jp": "小説", "reading": "しょうせつ", "en": "novel"},
+  {"lesson": 28, "jp": "小説家", "reading": "しょうせつか", "en": "novelist"},
+  {"lesson": 28, "jp": "歌手", "reading": "かしゅ", "en": "singer"},
+  {"lesson": 28, "jp": "息子", "reading": "むすこ", "en": "my son"},
+  {"lesson": 28, "jp": "娘", "reading": "むすめ", "en": "my daughter"},
+  {"lesson": 28, "jp": "ホームステイ", "reading": "", "en": "homestay"},
+  {"lesson": 28, "jp": "会話", "reading": "かいわ", "en": "conversation"},
+  {"lesson": 28, "jp": "おしゃべりします", "reading": "", "en": "chat"},
+  {"lesson": 29, "jp": "開きます", "reading": "あきます", "en": "[a door] opens"},
+  {"lesson": 29, "jp": "閉まります", "reading": "しまります", "en": "[a door] closes"},
+  {"lesson": 29, "jp": "つきます", "reading": "", "en": "[a light] comes on"},
+  {"lesson": 29, "jp": "消えます", "reading": "きえます", "en": "[a light] goes off"},
+  {"lesson": 29, "jp": "込みます", "reading": "こみます", "en": "[a road] gets crowded"},
+  {"lesson": 29, "jp": "空きます", "reading": "すきます", "en": "[a road] gets empty"},
+  {"lesson": 29, "jp": "壊れます", "reading": "こわれます", "en": "break"},
+  {"lesson": 29, "jp": "割れます", "reading": "われます", "en": "break, smash"},
+  {"lesson": 29, "jp": "折れます", "reading": "おれます", "en": "break, snap"},
+  {"lesson": 29, "jp": "破れます", "reading": "やぶれます", "en": "tear, make a hole"},
+  {"lesson": 29, "jp": "汚れます", "reading": "よごれます", "en": "get dirty"},
+  {"lesson": 29, "jp": "付きます", "reading": "つきます", "en": "be attached"},
+  {"lesson": 29, "jp": "外れます", "reading": "はずれます", "en": "come off"},
+  {"lesson": 29, "jp": "止まります", "reading": "とまります", "en": "stop"},
+  {"lesson": 29, "jp": "間違えます", "reading": "まちがえます", "en": "make a mistake"},
+  {"lesson": 29, "jp": "落とします", "reading": "おとします", "en": "drop, lose"},
+  {"lesson": 29, "jp": "掛かります", "reading": "かかります", "en": "be locked [a key]"},
+  {"lesson": 29, "jp": "お皿", "reading": "おさら", "en": "plate, dish"},
+  {"lesson": 29, "jp": "お茶碗", "reading": "おちゃわん", "en": "rice bowl"},
+  {"lesson": 29, "jp": "コップ", "reading": "", "en": "glass"},
+  {"lesson": 29, "jp": "ガラス", "reading": "", "en": "glass (material)"},
+  {"lesson": 29, "jp": "袋", "reading": "ふくろ", "en": "bag"},
+  {"lesson": 29, "jp": "財布", "reading": "さいふ", "en": "wallet"},
+  {"lesson": 29, "jp": "枝", "reading": "えだ", "en": "branch"},
+  {"lesson": 29, "jp": "駅員", "reading": "えきいん", "en": "station employee"},
+  {"lesson": 29, "jp": "忘れ物", "reading": "わすれもの", "en": "things left behind, lost property"},
+  {"lesson": 29, "jp": "網棚", "reading": "あみだな", "en": "baggage rack"},
+  {"lesson": 30, "jp": "貼ります", "reading": "はります", "en": "post, paste"},
+  {"lesson": 30, "jp": "掛けます", "reading": "かけます", "en": "hang"},
+  {"lesson": 30, "jp": "飾ります", "reading": "かざります", "en": "display, decorate"},
+  {"lesson": 30, "jp": "並べます", "reading": "ならべます", "en": "arrange, line up"},
+  {"lesson": 30, "jp": "植えます", "reading": "うえます", "en": "plant"},
+  {"lesson": 30, "jp": "戻します", "reading": "もどします", "en": "return, put back"},
+  {"lesson": 30, "jp": "まとめます", "reading": "", "en": "put together; sum up"},
+  {"lesson": 30, "jp": "片付けます", "reading": "かたづけます", "en": "put things in order, tidy up"},
+  {"lesson": 30, "jp": "しまいます", "reading": "", "en": "put away"},
+  {"lesson": 30, "jp": "決めます", "reading": "きめます", "en": "decide"},
+  {"lesson": 30, "jp": "知らせます", "reading": "しらせます", "en": "inform"},
+  {"lesson": 30, "jp": "相談します", "reading": "そうだんします", "en": "consult, discuss"},
+  {"lesson": 30, "jp": "予習します", "reading": "よしゅうします", "en": "prepare one's lesson"},
+  {"lesson": 30, "jp": "復習します", "reading": "ふくしゅうします", "en": "review one's lesson"},
+  {"lesson": 30, "jp": "そのままにします", "reading": "", "en": "leave things as they are"},
+  {"lesson": 30, "jp": "授業", "reading": "じゅぎょう", "en": "class"},
+  {"lesson": 30, "jp": "講義", "reading": "こうぎ", "en": "lecture"},
+  {"lesson": 30, "jp": "ミーティング", "reading": "", "en": "meeting"},
+  {"lesson": 30, "jp": "予定", "reading": "よてい", "en": "plan, schedule"},
+  {"lesson": 30, "jp": "カレンダー", "reading": "", "en": "calendar"},
+  {"lesson": 30, "jp": "ゴミ箱", "reading": "ごみばこ", "en": "trash box"},
+  {"lesson": 30, "jp": "人形", "reading": "にんぎょう", "en": "doll"},
+  {"lesson": 30, "jp": "花瓶", "reading": "かびん", "en": "vase"},
+  {"lesson": 30, "jp": "鏡", "reading": "かがみ", "en": "mirror"},
+  {"lesson": 30, "jp": "引き出し", "reading": "ひきだし", "en": "drawer"},
+  {"lesson": 30, "jp": "玄関", "reading": "げんかん", "en": "entrance"},
+  {"lesson": 30, "jp": "廊下", "reading": "ろうか", "en": "corridor"},
+  {"lesson": 30, "jp": "壁", "reading": "かべ", "en": "wall"},
+  {"lesson": 30, "jp": "池", "reading": "いけ", "en": "pond"},
+  {"lesson": 30, "jp": "交番", "reading": "こうばん", "en": "police box"},
+  {"lesson": 30, "jp": "周り", "reading": "まわり", "en": "round, around"},
+  {"lesson": 30, "jp": "真ん中", "reading": "まんなか", "en": "center"},
+  {"lesson": 30, "jp": "隅", "reading": "すみ", "en": "corner"},
+  {"lesson": 30, "jp": "ミュージカル", "reading": "", "en": "musical"}
+];
+
+const vocabLessonNumbers = [...new Set(vocabData.map(d => d.lesson))].sort((a,b) => a-b);
+let activeVocabLessons = new Set(vocabLessonNumbers);
+let deck = [];
+let deckIndex = 0;
+let cardFlipped = false;
+let reverseMode = false;
+
+const vocabClusterDefs = [];
+for(let i=0; i<vocabLessonNumbers.length; i+=6){
+  const chunk = vocabLessonNumbers.slice(i, i+6);
+  vocabClusterDefs.push({label:`Lessons ${chunk[0]}–${chunk[chunk.length-1]}`, nums:chunk});
+}
+
+function renderVocabFilter(){
+  const el = document.getElementById('vocabFilter');
+  el.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.className = 'filter-panel-head';
+  head.innerHTML = `<span>Browse by lesson</span>`;
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All lessons';
+  allBtn.className = 'chip-all-btn active';
+  allBtn.onclick = () => { activeVocabLessons = new Set(vocabLessonNumbers); buildDeck(); highlightVocabFilterButtons(); };
+  head.appendChild(allBtn);
+  el.appendChild(head);
+
+  vocabClusterDefs.forEach(cluster => {
+    const wrap = document.createElement('div');
+    wrap.className = 'filter-cluster';
+    const label = document.createElement('div');
+    label.className = 'cluster-label';
+    label.textContent = cluster.label;
+    wrap.appendChild(label);
+    const row = document.createElement('div');
+    row.className = 'chip-row';
+    cluster.nums.forEach(num => {
+      const b = document.createElement('button');
+      b.className = 'chip active';
+      b.textContent = 'Lesson ' + num;
+      b.dataset.lesson = num;
+      b.onclick = () => {
+        if(activeVocabLessons.has(num) && activeVocabLessons.size===1){
+          activeVocabLessons = new Set(vocabLessonNumbers);
+        } else {
+          activeVocabLessons = new Set([num]);
+        }
+        buildDeck(); highlightVocabFilterButtons();
+      };
+      row.appendChild(b);
+    });
+    wrap.appendChild(row);
+    el.appendChild(wrap);
+  });
+}
+function highlightVocabFilterButtons(){
+  const el = document.getElementById('vocabFilter');
+  const allActive = activeVocabLessons.size === vocabLessonNumbers.length;
+  el.querySelector('.chip-all-btn').classList.toggle('active', allActive);
+  el.querySelectorAll('.chip').forEach(b=>{
+    const num = Number(b.dataset.lesson);
+    b.classList.toggle('active', allActive || (activeVocabLessons.has(num) && activeVocabLessons.size===1));
+  });
+}
+
+function buildDeck(){
+  deck = shuffle(vocabData.filter(d => activeVocabLessons.has(d.lesson)));
+  deckIndex = 0;
+  cardFlipped = false;
+  renderCard();
+}
+function shuffleDeck(){
+  deck = shuffle(deck);
+  deckIndex = 0;
+  cardFlipped = false;
+  renderCard();
+}
+function renderCard(){
+  const el = document.getElementById('flashcardContainer');
+  const progressEl = document.getElementById('vocabProgress');
+  if(deck.length === 0){
+    el.innerHTML = `<div class="flashcard">No vocabulary in this selection.</div>`;
+    progressEl.textContent = '';
+    return;
+  }
+  const item = deck[deckIndex];
+  progressEl.textContent = `Card ${deckIndex+1} of ${deck.length}`;
+
+  const frontFace = `
+    <div class="flashcard" onclick="flipCard()">
+      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-jp">${escapeHtml(item.jp)}</div>
+      ${item.reading ? `<div class="flashcard-reading">${escapeHtml(item.reading)}</div>` : ''}
+      <div class="flashcard-hint">Tap to reveal meaning</div>
+    </div>
+  `;
+  const backFace = `
+    <div class="flashcard" onclick="flipCard()">
+      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-en">${escapeHtml(item.en)}</div>
+      <div class="flashcard-hint">Tap to flip back</div>
+    </div>
+  `;
+  const reverseFront = `
+    <div class="flashcard" onclick="flipCard()">
+      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-en">${escapeHtml(item.en)}</div>
+      <div class="flashcard-hint">Tap to reveal word</div>
+    </div>
+  `;
+  const reverseBack = `
+    <div class="flashcard" onclick="flipCard()">
+      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-jp">${escapeHtml(item.jp)}</div>
+      ${item.reading ? `<div class="flashcard-reading">${escapeHtml(item.reading)}</div>` : ''}
+      <div class="flashcard-hint">Tap to flip back</div>
+    </div>
+  `;
+
+  if(!reverseMode){
+    el.innerHTML = !cardFlipped ? frontFace : backFace;
+  } else {
+    el.innerHTML = !cardFlipped ? reverseFront : reverseBack;
+  }
+}
+function flipCard(){
+  cardFlipped = !cardFlipped;
+  renderCard();
+}
+function toggleReverse(){
+  reverseMode = !reverseMode;
+  cardFlipped = false;
+  const btn = document.getElementById('reverseBtn');
+  if(btn) btn.classList.toggle('active', reverseMode);
+  renderCard();
+}
+function nextCard(){
+  if(deck.length === 0) return;
+  deckIndex = (deckIndex + 1) % deck.length;
+  cardFlipped = false;
+  renderCard();
+}
+function prevCard(){
+  if(deck.length === 0) return;
+  deckIndex = (deckIndex - 1 + deck.length) % deck.length;
+  cardFlipped = false;
+  renderCard();
+}
+
+renderVocabFilter();
+buildDeck();
+
+// ───────────────────────── Quiz (self-generated from `data`) ─────────────────────────
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+// Builds N multiple-choice questions on the fly from the grammar reference data above —
+// no question bank is hand-written; every run samples different entries/distractors.
+function generateQuiz(n){
+  const pool = shuffle(data).slice(0, Math.min(n, data.length));
+  return pool.map(entry => {
+    const askMeaning = Math.random() < 0.5; // alternate question direction
+    const field = askMeaning ? 'meaning' : 'pattern';
+    const correctText = entry[field];
+    const questionText = askMeaning
+      ? `What does the pattern "${entry.pattern}" mean, or when would you use it?`
+      : `Which grammar pattern best fits this meaning: "${entry.meaning}"?`;
+
+    const others = shuffle(data.filter(d => d.pattern !== entry.pattern));
+    const distractors = [];
+    for(const d of others){
+      const val = d[field];
+      if(val !== correctText && !distractors.includes(val)) distractors.push(val);
+      if(distractors.length === 3) break;
+    }
+    const choices = shuffle([correctText, ...distractors]);
+    const exampleLine = entry.examples && entry.examples[0]
+      ? ` e.g. ${entry.examples[0].jp} — ${entry.examples[0].en}` : '';
+    return {
+      q: questionText,
+      choices,
+      answer: choices.indexOf(correctText),
+      explain: `${entry.pattern} — ${entry.meaning}.${exampleLine}`,
+    };
+  });
+}
+
+let quizData = [];
+let currentQ = 0;
+let score = 0;
+let firstTryCorrect = true;
+let questionSolved = false;
+
+function startNewQuiz(n){
+  quizData = generateQuiz(n || 15);
+  currentQ = 0;
+  score = 0;
+  document.getElementById('nextBtn').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const qc = document.getElementById('quizContainer');
+  const item = quizData[currentQ];
+  questionSolved = false;
+  firstTryCorrect = true;
+
+  document.getElementById('quizProgress').textContent = `Question ${currentQ+1} of ${quizData.length}`;
+  document.getElementById('quizScore').textContent = `Score: ${score} / ${quizData.length}`;
+  document.getElementById('nextBtn').style.display = 'none';
+
+  qc.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q${currentQ+1}.</span>${escapeHtml(item.q)}</div>
+      <div class="quiz-options" id="quizOpts">
+        ${item.choices.map((c, ci) => `<div class="quiz-option" data-idx="${ci}" onclick="answerQuiz(${ci})">${escapeHtml(c)}</div>`).join('')}
+      </div>
+      <div class="quiz-hint" id="quizHint"></div>
+      <div class="quiz-explain" id="quizExplain"></div>
+    </div>
+  `;
+}
+
+function answerQuiz(ci){
+  if(questionSolved) return;
+  const item = quizData[currentQ];
+  const opts = document.querySelectorAll('#quizOpts .quiz-option');
+
+  if(ci === item.answer){
+    questionSolved = true;
+    if(firstTryCorrect) score++;
+    opts[ci].classList.add('correct');
+    opts.forEach(o => o.style.pointerEvents = 'none');
+    document.getElementById('quizHint').textContent = '';
+    document.getElementById('quizExplain').textContent = item.explain;
+    document.getElementById('quizExplain').style.display = 'block';
+    document.getElementById('quizScore').textContent = `Score: ${score} / ${quizData.length}`;
+
+    if(currentQ < quizData.length - 1){
+      document.getElementById('nextBtn').style.display = 'inline-block';
+    } else {
+      const done = document.createElement('div');
+      done.className = 'quiz-done';
+      done.textContent = `🎉 Quiz complete! Final score: ${score} / ${quizData.length}`;
+      document.getElementById('quizContainer').appendChild(done);
+    }
+  } else {
+    firstTryCorrect = false;
+    opts[ci].classList.add('incorrect');
+    opts[ci].style.pointerEvents = 'none';
+    document.getElementById('quizHint').textContent = 'Not quite — try another option.';
+  }
+}
+
+function nextQuestion(){
+  currentQ++;
+  renderQuestion();
+}
+
+startNewQuiz(15);
+</script>
+</body>
+</html>

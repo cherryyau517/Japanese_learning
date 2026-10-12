@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Personal Japanese grammar, lesson, conjugation and vocabulary reference with quizzes and flashcards — lessons 14–30.">
+<meta name="description" content="Personal Japanese grammar, lesson, conjugation and vocabulary reference with quizzes and flashcards — lessons 14–31.">
 <meta name="theme-color" content="#2c2c2c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -202,7 +202,7 @@
 
 <header>
   <h1>日本語文法リファレンス — Japanese Grammar Reference</h1>
-  <p>Lessons 14–30 · Organized by use case (what you're trying to say) · Japanese + English only</p>
+  <p>Lessons 14–31 · Organized by use case (what you're trying to say) · Japanese + English only</p>
   <div class="controls">
     <input id="search" type="text" placeholder="Search grammar, meaning, or example (Japanese or English)...">
   </div>
@@ -234,7 +234,7 @@
   </div>
 
   <div class="page" id="vocabPage">
-    <div class="quiz-intro">New words pulled from your lesson notes (lessons 16–30). Pick a lesson range below, then tap the card to flip between the word and its meaning.</div>
+    <div class="quiz-intro">New words pulled from your lesson notes (lessons 16–31), plus live-lesson vocabulary your teacher recorded each week. Pick a lesson range or date range below, then tap the card to flip between the word and its meaning.</div>
     <div class="filter-panel" id="vocabFilter"></div>
     <div class="vocab-progress" id="vocabProgress"></div>
     <div id="flashcardContainer"></div>
@@ -523,6 +523,28 @@ const data = [
 {group:"Conjugation Reference Tables", lesson:19, pattern:"た形（辞書形から）", meaning:"Past plain form of verbs — 3 groups", examples:[
   {jp:"書きます→書いた／食べます→食べた／来ます→来た", en:"Same conjugation groups as て-form"}
 ]},
+
+// ── Making Plans & Stating Intentions ──
+{group:"Making Plans & Stating Intentions", lesson:31, pattern:"意向形（Vよう）", meaning:"Let's do V / I will do V (casual volitional form)", examples:[
+  {jp:"いっしょに行こう。", en:"Let's go together."},
+  {jp:"うん、行こう。", en:"Yeah, let's go. (casual response to レストランに行きませんか)"},
+  {jp:"じゃ、どこかで少し休もう。", en:"Well then, let's rest a bit somewhere."}
+]},
+{group:"Making Plans & Stating Intentions", lesson:31, pattern:"〜（よ）うと思っています", meaning:"I'm thinking of doing V (stated intention, still just an idea)", examples:[
+  {jp:"将来自分の会社を作ろうと思っています。", en:"I'm thinking of starting my own company in the future."},
+  {jp:"国に帰ろうと思っています。", en:"I'm thinking of going back to my country."},
+  {jp:"これからコピーしようと思っています。", en:"I'm thinking of making the copies now."}
+]},
+{group:"Making Plans & Stating Intentions", lesson:31, pattern:"Vる/Vない＋つもりです", meaning:"I intend to do / not do V (a decision already made by the speaker)", examples:[
+  {jp:"来月車を買うつもりです。", en:"I intend to buy a car next month."},
+  {jp:"国に帰るつもりです。", en:"I intend to go back to my country."},
+  {jp:"誰にも会わないつもりです。", en:"I don't intend to meet anyone."}
+]},
+{group:"Making Plans & Stating Intentions", lesson:31, pattern:"Vる/Nの＋予定です", meaning:"It is scheduled/planned that V (a plan, often decided by someone else or fixed as a schedule)", examples:[
+  {jp:"8時に出発する予定です。", en:"I am scheduled to depart at 8 o'clock."},
+  {jp:"12時に昼ご飯の予定です。", en:"Lunch is scheduled for 12 o'clock."},
+  {jp:"10日間の予定です。", en:"It is planned to be for 10 days."}
+]},
 ];
 
 const container = document.getElementById('cardContainer');
@@ -545,6 +567,7 @@ const clusterDefs = [
   {label:"Social & Communication", idx:[12,13,14,20]},
   {label:"Experience, Change & Results", idx:[15,16,17,18,19]},
   {label:"Conjugation Reference", idx:[21]},
+  {label:"Plans & Future Intentions", idx:[22]},
 ];
 
 function renderCategoryFilter(){
@@ -1152,20 +1175,697 @@ const vocabData = [
   {"lesson": 30, "jp": "周り", "reading": "まわり", "en": "round, around"},
   {"lesson": 30, "jp": "真ん中", "reading": "まんなか", "en": "center"},
   {"lesson": 30, "jp": "隅", "reading": "すみ", "en": "corner"},
-  {"lesson": 30, "jp": "ミュージカル", "reading": "", "en": "musical"}
+  {"lesson": 30, "jp": "ミュージカル", "reading": "", "en": "musical"},
+  {"lesson": 30, "jp": "返します", "reading": "かえします", "en": "return, put back"},
+  {"lesson": 31, "jp": "始めます", "reading": "はじめます", "en": "begin, start"},
+  {"lesson": 31, "jp": "続けます", "reading": "つづけます", "en": "continue"},
+  {"lesson": 31, "jp": "見つけます", "reading": "みつけます", "en": "find"},
+  {"lesson": 31, "jp": "受けます[試験を]", "reading": "うけます", "en": "take [an exam]"},
+  {"lesson": 31, "jp": "入学します[大学に]", "reading": "にゅうがくします", "en": "enter [a university]"},
+  {"lesson": 31, "jp": "卒業します[大学を]", "reading": "そつぎょうします", "en": "graduate [from a university]"},
+  {"lesson": 31, "jp": "出席します", "reading": "しゅっせきします", "en": "attend [a meeting etc.]"},
+  {"lesson": 31, "jp": "休憩します", "reading": "きゅうけいします", "en": "take a break"},
+  {"lesson": 31, "jp": "展覧会", "reading": "てんらんかい", "en": "exhibition"},
+  {"lesson": 31, "jp": "結婚式", "reading": "けっこんしき", "en": "wedding ceremony"},
+  {"lesson": 31, "jp": "お葬式", "reading": "おそうしき", "en": "funeral"},
+  {"lesson": 31, "jp": "本社", "reading": "ほんしゃ", "en": "head office"},
+  {"lesson": 31, "jp": "支店", "reading": "してん", "en": "branch office"},
+  {"lesson": 31, "jp": "教会", "reading": "きょうかい", "en": "church"},
+  {"lesson": 31, "jp": "大学院", "reading": "だいがくいん", "en": "graduate school"},
+  {"lesson": 31, "jp": "動物園", "reading": "どうぶつえん", "en": "zoo"},
+  {"lesson": 31, "jp": "温泉", "reading": "おんせん", "en": "hot spring, spa"},
+  {"lesson": 31, "jp": "お客さん", "reading": "おきゃくさん", "en": "visitor, guest, client, customer"},
+  {"lesson": 31, "jp": "残ります", "reading": "のこります", "en": "remain, be left"},
+  {"lesson": 31, "jp": "インターネット", "reading": "", "en": "internet"},
+  {"lesson": "TN", "date": "2025-01-20", "jp": "１ヶ月", "reading": "いっかげつ", "en": "1 month"},
+  {"lesson": "TN", "date": "2025-01-20", "jp": "こと", "reading": "", "en": "things"},
+  {"lesson": "TN", "date": "2025-01-20", "jp": "辛い", "reading": "からい", "en": "spicy"},
+  {"lesson": "TN", "date": "2025-01-20", "jp": "忘れる", "reading": "わすれる", "en": "to forget"},
+  {"lesson": "TN", "date": "2025-01-20", "jp": "作る", "reading": "つくる", "en": "to make"},
+  {"lesson": "TN", "date": "2025-01-20", "jp": "使う", "reading": "つかう", "en": "to use"},
+  {"lesson": "TN", "date": "2025-01-27", "jp": "〜度", "reading": "〜ど", "en": "~ degrees"},
+  {"lesson": "TN", "date": "2025-01-27", "jp": "道", "reading": "みち", "en": "road"},
+  {"lesson": "TN", "date": "2025-01-27", "jp": "滑る", "reading": "すべる", "en": "to slip"},
+  {"lesson": "TN", "date": "2025-01-27", "jp": "ほとんど", "reading": "", "en": "mostly"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "法律、法", "reading": "ほうりつ、ほう", "en": "law"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "あけましておめでとうございます", "reading": "", "en": "Happy New Year! (January)"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "良いお年を", "reading": "よいおとしを", "en": "Happy New Year! (December)"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "初めて", "reading": "はじめて", "en": "first time"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "間違ったNOUN", "reading": "まちがったNOUN", "en": "wrong NOUN"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "小麦粉", "reading": "こむぎこ", "en": "flour"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "チャイナタウン", "reading": "", "en": "Chinatown"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "３日", "reading": "みっか", "en": "3 days"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "お正月", "reading": "おしょうがつ", "en": "New Year period (Jan 1-3)"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "体験する", "reading": "たいけんする", "en": "to experience"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "〜に乗る", "reading": "のる", "en": "to ride"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "地元", "reading": "じもと", "en": "hometown"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "もちろん", "reading": "", "en": "of course"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "いつ？", "reading": "", "en": "when?"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "過ごす", "reading": "すごす", "en": "to spend (time)"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "妹", "reading": "いもうと", "en": "younger sister"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "弟", "reading": "おとうと", "en": "younger brother"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "南米、南アメリカ", "reading": "なんべい、みなみあめりか", "en": "South America"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "手伝う", "reading": "てつだう", "en": "to help"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "消す", "reading": "けす", "en": "to turn off, to erase"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "つける", "reading": "", "en": "to turn on"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "あげる", "reading": "", "en": "to give"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "かける", "reading": "", "en": "to make a phone call"},
+  {"lesson": "TN", "date": "2025-02-03", "jp": "〜に入る", "reading": "はいる", "en": "to enter"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "スカッシュ", "reading": "", "en": "squash"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "去年", "reading": "きょねん", "en": "last year"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "始める", "reading": "はじめる", "en": "to start"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "バドミントン", "reading": "", "en": "badminton"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "短い", "reading": "みじかい", "en": "short"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "２人", "reading": "ふたり", "en": "2 people"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "相手", "reading": "あいて", "en": "opponent"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "白人", "reading": "はくじん", "en": "white person"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "１年中", "reading": "いちねんじゅう", "en": "whole year"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "インドアスポーツ", "reading": "", "en": "indoor sports"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "電話をかける", "reading": "でんわをかける", "en": "to make a phone call"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "子ども", "reading": "こども", "en": "children"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "夫", "reading": "おっと", "en": "my husband"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "妻", "reading": "つま", "en": "my wife"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "ご主人", "reading": "ごしゅじん", "en": "someone's husband"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "奥さん", "reading": "おくさん", "en": "someone's wife"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "曲がる", "reading": "まがる", "en": "to turn"},
+  {"lesson": "TN", "date": "2025-02-10", "jp": "お釣り", "reading": "おつり", "en": "change (money)"},
+  {"lesson": "TN", "date": "2025-02-17", "jp": "思う", "reading": "おもう", "en": "to think"},
+  {"lesson": "TN", "date": "2025-02-17", "jp": "思い出す", "reading": "おもいだす", "en": "to remember, to recall"},
+  {"lesson": "TN", "date": "2025-02-17", "jp": "覚える", "reading": "おぼえる", "en": "to remember, to memorize"},
+  {"lesson": "TN", "date": "2025-02-17", "jp": "扇風機", "reading": "せんぷうき", "en": "fan"},
+  {"lesson": "TN", "date": "2025-02-17", "jp": "選ぶ", "reading": "えらぶ", "en": "to choose"},
+  {"lesson": "TN", "date": "2025-02-17", "jp": "人気な", "reading": "にんきな", "en": "popular"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "アパート", "reading": "", "en": "apartment"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "他のNOUN", "reading": "ほかの", "en": "another, other"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "小説", "reading": "しょうせつ", "en": "novel"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "最近", "reading": "さいきん", "en": "recently"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "ビジネス本", "reading": "びじねすぼん", "en": "business books"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "昇格する", "reading": "しょうかくする", "en": "to get promoted"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "最後の週", "reading": "さいごのしゅう", "en": "last week (of a period)"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "公園", "reading": "こうえん", "en": "park"},
+  {"lesson": "TN", "date": "2025-02-24", "jp": "たばこを吸う", "reading": "たばこをすう", "en": "to smoke"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "ちょうどいま", "reading": "", "en": "just now"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "寂しい", "reading": "さびしい", "en": "lonely"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "別れる", "reading": "わかれる", "en": "to break up"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "もう〜", "reading": "", "en": "already"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "まだ〜", "reading": "", "en": "still"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "義務教育", "reading": "ぎむきょういく", "en": "compulsory education"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "アルバイト", "reading": "", "en": "part-time job"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "化粧", "reading": "けしょう", "en": "makeup"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "パン屋", "reading": "パンや", "en": "bakery"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "生徒", "reading": "せいと", "en": "student, pupil"},
+  {"lesson": "TN", "date": "2025-03-02", "jp": "専攻", "reading": "せんこう", "en": "major (field of study)"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "シドニー", "reading": "", "en": "Sydney"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "泳ぐ", "reading": "およぐ", "en": "to swim"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "曇り", "reading": "くもり", "en": "cloudy"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "水着", "reading": "みずぎ", "en": "swimsuit"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "タオル", "reading": "", "en": "towel"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "最初の週", "reading": "さいしょのしゅう", "en": "first week"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "ノロウイルス", "reading": "", "en": "Norovirus"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "延期する", "reading": "えんきする", "en": "to postpone"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "怒る", "reading": "おこる", "en": "to get angry"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "変な", "reading": "へんな", "en": "weird"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "走る", "reading": "はしる", "en": "to run"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "珍しい", "reading": "めずらしい", "en": "rare"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "観光客", "reading": "かんこうきゃく", "en": "tourist"},
+  {"lesson": "TN", "date": "2025-03-17", "jp": "答える", "reading": "こたえる", "en": "to answer"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "家", "reading": "いえ", "en": "house"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "内", "reading": "うち", "en": "home, my area"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "どちら？／どっち？", "reading": "", "en": "which?"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "わたしもそう思います", "reading": "わたしもそうおもいます", "en": "I agree (I think so too)"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "もっと", "reading": "", "en": "more"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "晴れ", "reading": "はれ", "en": "sunny"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "うざい", "reading": "", "en": "annoying (thing, event)"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "イライラする", "reading": "いらいらする", "en": "to be irritated, annoyed (feeling)"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "生まれる", "reading": "うまれる", "en": "to be born"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "首", "reading": "くび", "en": "neck"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "低い", "reading": "ひくい", "en": "low"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "多い", "reading": "おおい", "en": "many"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "３月", "reading": "さんがつ", "en": "March"},
+  {"lesson": "TN", "date": "2025-03-24", "jp": "４月", "reading": "しがつ", "en": "April"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "気温", "reading": "きおん", "en": "air temperature"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "夜桜", "reading": "よざくら", "en": "cherry blossoms at night"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "桜並木", "reading": "さくらなみき", "en": "row of cherry blossom trees"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "平日", "reading": "へいじつ", "en": "weekday"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "週末", "reading": "しゅうまつ", "en": "weekend"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "〜本", "reading": "ほん", "en": "counter for long thin objects"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "NOUNによって", "reading": "", "en": "depends on NOUN"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "専門", "reading": "せんもん", "en": "specialty, major"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "必要", "reading": "ひつよう", "en": "necessary, need"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "嫌い", "reading": "きらい", "en": "dislike"},
+  {"lesson": "TN", "date": "2025-03-31", "jp": "お金を下ろす", "reading": "おかねをおろす", "en": "to withdraw money"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "１時間半", "reading": "いちじかんはん", "en": "1.5 hours"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "本来、元", "reading": "ほんらい、もと", "en": "originally"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "筋肉痛", "reading": "きんにくつう", "en": "muscular pain"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "筋肉", "reading": "きんにく", "en": "muscle"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "腕", "reading": "うで", "en": "arm"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "片手", "reading": "かたて", "en": "one hand"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "両手", "reading": "りょうて", "en": "both hands"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "問題", "reading": "もんだい", "en": "problem"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "強く", "reading": "つよい", "en": "strong(ly)"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "４つ", "reading": "よっつ", "en": "four (things)"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "一昨年", "reading": "おととし", "en": "year before last"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "〜に慣れる", "reading": "なれる", "en": "to get used to"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "半年", "reading": "はんとし", "en": "half a year"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "つまらない", "reading": "", "en": "boring"},
+  {"lesson": "TN", "date": "2025-04-07", "jp": "奥", "reading": "おく", "en": "inner part, back"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "怪我", "reading": "けが", "en": "injury"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "怪我をする", "reading": "けがをする", "en": "to get hurt"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "食べ放題", "reading": "たべほうだい", "en": "all you can eat"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "飲み放題", "reading": "のみほうだい", "en": "all you can drink"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "距離", "reading": "きょり", "en": "distance"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "疲れる", "reading": "つかれる", "en": "to be tired"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "毎時間", "reading": "まいじかん", "en": "every hour"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "高速道路", "reading": "こうそくどうろ", "en": "highway"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "〜を越える", "reading": "こえる", "en": "to cross over"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "霧", "reading": "きり", "en": "fog"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "鹿", "reading": "しか", "en": "deer"},
+  {"lesson": "TN", "date": "2025-04-13", "jp": "残業する", "reading": "ざんぎょうする", "en": "to work overtime"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "昇格", "reading": "しょうかく", "en": "promotion"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "部下", "reading": "ぶか", "en": "subordinate, junior"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "複雑な", "reading": "ふくざつ", "en": "complicated"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "ダック、鴨", "reading": "かも", "en": "duck"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "鴨そば、鴨鍋", "reading": "かもそば、かもなべ", "en": "duck soba / duck hotpot"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "麻婆豆腐、マーボー豆腐", "reading": "まーぼーどうふ", "en": "mapo tofu"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "１月", "reading": "いちがつ", "en": "January"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "〜回", "reading": "かい", "en": "counter for times"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "ロック", "reading": "", "en": "rock (music)"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "男の子", "reading": "おとこのこ", "en": "boy"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "歌手", "reading": "かしゅ", "en": "singer"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "八重桜", "reading": "やえざくら", "en": "double-flowered cherry blossom"},
+  {"lesson": "TN", "date": "2025-04-27", "jp": "華奢な", "reading": "きゃしゃな", "en": "delicate, slender"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "湖", "reading": "みずうみ", "en": "lake"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "秋", "reading": "あき", "en": "autumn"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "夏", "reading": "なつ", "en": "summer"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "大会", "reading": "たいかい", "en": "competition, tournament"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "他の人", "reading": "ほかのひと", "en": "other people"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "Number＋人", "reading": "にん", "en": "counter for people"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "〜に出る／〜に参加する", "reading": "でる／さんかする", "en": "to join, to participate"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "すっぱい", "reading": "", "en": "sour"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "Number＋本", "reading": "ほん", "en": "counter for long thin things"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "ビンテージ", "reading": "", "en": "vintage"},
+  {"lesson": "TN", "date": "2025-05-11", "jp": "ご祝儀袋", "reading": "ごしゅうぎぶくろ", "en": "monetary gift envelope (for celebrations)"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "半袖", "reading": "はんそで", "en": "short sleeve (clothing)"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "風が強い", "reading": "かぜがつよい", "en": "windy"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "風が吹く", "reading": "かぜがふく", "en": "the wind blows"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "おもちゃ", "reading": "", "en": "toy"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "触り心地がいい", "reading": "さわりごこちがいい", "en": "feels good to the touch"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "例えば", "reading": "たとえば", "en": "for example"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "有名人", "reading": "ゆうめいじん", "en": "celebrity"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "計画する", "reading": "けいかくする", "en": "to plan"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "島", "reading": "しま", "en": "island"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "予定", "reading": "よてい", "en": "schedule, plans"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "いるか", "reading": "", "en": "dolphin"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "鮫", "reading": "さめ", "en": "shark"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "ジンベイザメ", "reading": "", "en": "whale shark"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "水深", "reading": "すいしん", "en": "water depth"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "要る", "reading": "いる", "en": "to need"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "いくつ？", "reading": "", "en": "how many?"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "手", "reading": "て", "en": "hand"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "風邪をひく", "reading": "かぜをひく", "en": "to catch a cold"},
+  {"lesson": "TN", "date": "2025-05-18", "jp": "咳が出る", "reading": "せきがでる", "en": "to cough"},
+  {"lesson": "TN", "date": "2025-05-25", "jp": "また", "reading": "", "en": "also (sentence-initial)"},
+  {"lesson": "TN", "date": "2025-05-25", "jp": "船", "reading": "ふね", "en": "ship"},
+  {"lesson": "TN", "date": "2025-05-25", "jp": "シーフード", "reading": "", "en": "seafood"},
+  {"lesson": "TN", "date": "2025-05-25", "jp": "新鮮な", "reading": "しんせんな", "en": "fresh"},
+  {"lesson": "TN", "date": "2025-05-25", "jp": "行列", "reading": "ぎょうれつ", "en": "queue, line"},
+  {"lesson": "TN", "date": "2025-06-01", "jp": "穴", "reading": "あな", "en": "hole"},
+  {"lesson": "TN", "date": "2025-06-01", "jp": "ずっと", "reading": "", "en": "for a long time, by far"},
+  {"lesson": "TN", "date": "2025-06-01", "jp": "薬", "reading": "くすり", "en": "medicine"},
+  {"lesson": "TN", "date": "2025-06-01", "jp": "彫刻", "reading": "ちょうこく", "en": "sculpture"},
+  {"lesson": "TN", "date": "2025-06-01", "jp": "形", "reading": "かたち", "en": "form, shape"},
+  {"lesson": "TN", "date": "2025-06-01", "jp": "いくつか", "reading": "", "en": "some (of them)"},
+  {"lesson": "TN", "date": "2025-06-01", "jp": "お大事に", "reading": "おだいじに", "en": "take care of yourself (get well)"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "いとこ", "reading": "", "en": "cousin"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "卒業式", "reading": "そつぎょうしき", "en": "graduation ceremony"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "火曜日", "reading": "かようび", "en": "Tuesday"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "叔母さん", "reading": "おばさん", "en": "aunt"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "おばあさん", "reading": "", "en": "grandmother"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "似ている", "reading": "にている", "en": "similar"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "AとB", "reading": "", "en": "A and B"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "AやB", "reading": "", "en": "A and B (among others)"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "違うNOUN", "reading": "ちがう", "en": "different NOUN"},
+  {"lesson": "TN", "date": "2025-06-08", "jp": "寮", "reading": "りょう", "en": "dormitory"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "封筒", "reading": "ふうとう", "en": "envelope"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "スーツケース", "reading": "", "en": "suitcase"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "薄い", "reading": "うすい", "en": "thin"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "かさばる", "reading": "", "en": "to be bulky"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "蒸し暑い", "reading": "むしあつい", "en": "humid"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "持って行く", "reading": "もっていく", "en": "to bring, to take along"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "車酔い", "reading": "くるまよい", "en": "carsick"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "どうやって？", "reading": "", "en": "how?"},
+  {"lesson": "TN", "date": "2025-06-19", "jp": "受付", "reading": "うけつけ", "en": "reception"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "アプリ", "reading": "", "en": "app"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "AかB", "reading": "", "en": "A or B"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "複数日", "reading": "ふくすうにち", "en": "multi-day"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "たいてい", "reading": "", "en": "usually"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "座る", "reading": "すわる", "en": "to sit"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "８日", "reading": "ようか", "en": "8 days, 8th of the month"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "張家界", "reading": "ちょうかかい", "en": "Zhangjiajie (place in China)"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "気持ち", "reading": "きもち", "en": "feeling"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "気持ちがいい", "reading": "きもちがいい", "en": "comfortable, feels good"},
+  {"lesson": "TN", "date": "2025-06-22", "jp": "なかなか＋negative", "reading": "", "en": "not easy to do"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "昼ごはん", "reading": "ひるごはん", "en": "lunch"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "両方", "reading": "りょうほう", "en": "both"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "野球部", "reading": "やきゅうぶ", "en": "baseball club"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "結婚式", "reading": "けっこんしき", "en": "wedding ceremony"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "披露宴", "reading": "ひろうえん", "en": "wedding reception"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "二次会", "reading": "にじかい", "en": "after-party (2nd party)"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "旅行", "reading": "りょこう", "en": "travel, trip"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "乾燥する", "reading": "かんそうする", "en": "to get dry"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "快適な", "reading": "かいてきな", "en": "comfortable"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "顔", "reading": "かお", "en": "face"},
+  {"lesson": "TN", "date": "2025-07-21", "jp": "〜が上手", "reading": "じょうず", "en": "good at"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "近い", "reading": "ちかい", "en": "close, near"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "着く、到着する", "reading": "つく、とうちゃくする", "en": "to arrive"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "植物", "reading": "しょくぶつ", "en": "plants"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "死ぬ", "reading": "しぬ", "en": "to die"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "物", "reading": "もの", "en": "thing (object)"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "家庭用品", "reading": "かていようひん", "en": "household goods"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "しゃもじ", "reading": "", "en": "rice paddle (spoon for rice)"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "何人かのNOUN", "reading": "なんにんかの", "en": "some (people)"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "キャンベラ", "reading": "", "en": "Canberra"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "首都", "reading": "しゅと", "en": "capital city"},
+  {"lesson": "TN", "date": "2025-07-26", "jp": "主人公", "reading": "しゅじんこう", "en": "main character"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "時差ボケ", "reading": "じさぼけ", "en": "jet lag"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "責任", "reading": "せきにん", "en": "responsibility"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "中学校", "reading": "ちゅうがっこう", "en": "junior high school"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "親友", "reading": "しんゆう", "en": "best friend"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "遊園地", "reading": "ゆうえんち", "en": "amusement park"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "２週間前", "reading": "にしゅうかんまえ", "en": "2 weeks ago"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "運転する", "reading": "うんてんする", "en": "to drive"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "画家", "reading": "がか", "en": "painter"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "景色", "reading": "けしき", "en": "view, scenery"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "スイス", "reading": "", "en": "Switzerland"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "リベンジ", "reading": "", "en": "revenge"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "やる", "reading": "", "en": "to do"},
+  {"lesson": "TN", "date": "2025-08-03", "jp": "無理な", "reading": "むりな", "en": "impossible, unreasonable"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "問題解決", "reading": "もんだいかいけつ", "en": "problem solving"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "メトロポリタン・オペラ", "reading": "", "en": "Met Opera (Metropolitan Opera)"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "今朝", "reading": "けさ", "en": "this morning"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "面接", "reading": "めんせつ", "en": "interview"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "期待", "reading": "きたい", "en": "expectations"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "歌う", "reading": "うたう", "en": "to sing"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "出かける", "reading": "でかける", "en": "to go out"},
+  {"lesson": "TN", "date": "2025-08-10", "jp": "調べる", "reading": "しらべる", "en": "to check, to investigate"},
+  {"lesson": "TN", "date": "2025-08-24", "jp": "政治", "reading": "せいじ", "en": "politics"},
+  {"lesson": "TN", "date": "2025-08-24", "jp": "少ない", "reading": "すくない", "en": "a few, few"},
+  {"lesson": "TN", "date": "2025-08-24", "jp": "種類", "reading": "しゅるい", "en": "type, kind"},
+  {"lesson": "TN", "date": "2025-08-24", "jp": "じゃがいも", "reading": "", "en": "potato"},
+  {"lesson": "TN", "date": "2025-08-24", "jp": "TIMEかかる", "reading": "", "en": "takes (time)"},
+  {"lesson": "TN", "date": "2025-08-24", "jp": "昔", "reading": "むかし", "en": "long time ago"},
+  {"lesson": "TN", "date": "2025-08-24", "jp": "サイパン", "reading": "", "en": "Saipan"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "３連休", "reading": "さんれんきゅう", "en": "3-day weekend"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "波", "reading": "なみ", "en": "wave"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "日没、日の入り", "reading": "にちぼつ、ひのいり", "en": "sunset"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "反対側", "reading": "はんたいがわ", "en": "opposite side"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "自由の女神", "reading": "じゆうのめがみ", "en": "Statue of Liberty"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "ドル", "reading": "", "en": "dollar"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "見つける", "reading": "みつける", "en": "to find"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "NOUNの終わり", "reading": "おわり", "en": "end of NOUN"},
+  {"lesson": "TN", "date": "2025-08-31", "jp": "〜ごろ", "reading": "", "en": "about ~ (approximate time)"},
+  {"lesson": "TN", "date": "2025-09-07", "jp": "準備", "reading": "じゅんび", "en": "preparation"},
+  {"lesson": "TN", "date": "2025-09-07", "jp": "全く", "reading": "まったく", "en": "completely"},
+  {"lesson": "TN", "date": "2025-09-07", "jp": "NOUNの後", "reading": "NOUNのあと", "en": "after NOUN"},
+  {"lesson": "TN", "date": "2025-09-07", "jp": "UFOキャッチャー", "reading": "ユーフォーキャッチャー", "en": "UFO catcher (claw machine)"},
+  {"lesson": "TN", "date": "2025-09-14", "jp": "公開日", "reading": "こうかいび", "en": "release date"},
+  {"lesson": "TN", "date": "2025-09-14", "jp": "広告", "reading": "こうこく", "en": "advertisement"},
+  {"lesson": "TN", "date": "2025-09-14", "jp": "普通", "reading": "ふつう", "en": "normal"},
+  {"lesson": "TN", "date": "2025-09-14", "jp": "いす", "reading": "", "en": "chair"},
+  {"lesson": "TN", "date": "2025-09-14", "jp": "切手", "reading": "きって", "en": "stamp"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "３回目", "reading": "さんかいめ", "en": "3rd time"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "月曜日", "reading": "げつようび", "en": "Monday"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "州", "reading": "しゅう", "en": "state"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "３日間", "reading": "みっかかん", "en": "a period of 3 days"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "遅れる", "reading": "おくれる", "en": "to be delayed"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "遅延", "reading": "ちえん", "en": "delay"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "知らせる", "reading": "しらせる", "en": "to let someone know"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "お菓子", "reading": "おかし", "en": "sweets"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "踊る", "reading": "おどる", "en": "to dance"},
+  {"lesson": "TN", "date": "2025-09-21", "jp": "オランダ", "reading": "", "en": "Netherlands"},
+  {"lesson": "TN", "date": "2025-09-28", "jp": "気候", "reading": "きこう", "en": "climate"},
+  {"lesson": "TN", "date": "2025-09-28", "jp": "営業する", "reading": "えいぎょうする", "en": "to do business"},
+  {"lesson": "TN", "date": "2025-09-28", "jp": "前のNOUN", "reading": "まえの", "en": "previous NOUN"},
+  {"lesson": "TN", "date": "2025-09-28", "jp": "提案", "reading": "ていあん", "en": "proposal"},
+  {"lesson": "TN", "date": "2025-09-28", "jp": "〜に気をつける", "reading": "きをつける", "en": "to be careful about"},
+  {"lesson": "TN", "date": "2025-09-28", "jp": "気をつけて", "reading": "きをつけて", "en": "be careful, take care"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "いくら？", "reading": "", "en": "how much?"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "どのくらい？", "reading": "", "en": "how long? / how many?"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "ハウルの動く城", "reading": "ハウルのうごくしろ", "en": "Howl's Moving Castle"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "役に立つ", "reading": "やくにたつ", "en": "to be useful"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "〜について", "reading": "", "en": "about ~"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "仲直りする", "reading": "なかなおりする", "en": "to make up (after a fight)"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "喧嘩", "reading": "けんか", "en": "fight, quarrel"},
+  {"lesson": "TN", "date": "2025-10-05", "jp": "だんだん", "reading": "", "en": "gradually"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "僕", "reading": "", "en": "I (first person, male)"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "髪を切る", "reading": "かみをきる", "en": "to cut (one's) hair"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "自然", "reading": "しぜん", "en": "nature"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "毛", "reading": "け", "en": "fur"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "明後日", "reading": "あさって", "en": "day after tomorrow"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "同僚", "reading": "どうりょう", "en": "colleague"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "遠い", "reading": "とおい", "en": "far"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "〜が生まれる", "reading": "うまれる", "en": "to be born (intransitive)"},
+  {"lesson": "TN", "date": "2025-11-02", "jp": "〜を産む", "reading": "うむ", "en": "to give birth"},
+  {"lesson": "TN", "date": "2025-11-09", "jp": "animalを飼う", "reading": "かう", "en": "to keep an animal as a pet"},
+  {"lesson": "TN", "date": "2025-11-09", "jp": "パンプス", "reading": "", "en": "pumps (shoes)"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "お笑い", "reading": "おわらい", "en": "comedy"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "時差", "reading": "じさ", "en": "time difference"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "暗い", "reading": "くらい", "en": "dark"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "黒い", "reading": "くろい", "en": "black"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "１日中", "reading": "いちにちじゅう", "en": "all day, whole day"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "おしゃれ", "reading": "", "en": "fashionable, stylish"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "都合がいい／都合が悪い", "reading": "つごうがいい／つごうがわるい", "en": "convenient / inconvenient (about plans)"},
+  {"lesson": "TN", "date": "2025-11-14", "jp": "失くす", "reading": "なくす", "en": "to lose (an object)"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "９時", "reading": "くじ", "en": "9 o'clock"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "決める", "reading": "きめる", "en": "to decide"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "とうもろこし", "reading": "", "en": "corn"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "彼氏", "reading": "かれし", "en": "boyfriend"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "彼女", "reading": "かのじょ", "en": "she, girlfriend"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "パフォーマンスする", "reading": "", "en": "to perform"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "トリ、大トリ", "reading": "おおとり", "en": "final act, headliner"},
+  {"lesson": "TN", "date": "2025-11-22", "jp": "足りる", "reading": "たりる", "en": "to be enough"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "インストール", "reading": "", "en": "to install"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "火事", "reading": "かじ", "en": "fire"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "外側", "reading": "そとがわ", "en": "outside"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "煙", "reading": "けむり", "en": "smoke"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "競争率が激しい", "reading": "きょうそうりつがはげしい", "en": "high competition (fierce competition rate)"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "果物", "reading": "くだもの", "en": "fruit"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "気にする", "reading": "きにする", "en": "to care, to mind"},
+  {"lesson": "TN", "date": "2025-11-30", "jp": "警察", "reading": "けいさつ", "en": "police"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "一度、一回", "reading": "いちど、いっかい", "en": "once, one time"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "歌", "reading": "うた", "en": "song"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "行動力", "reading": "こうどうりょく", "en": "proactiveness, drive"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "NOUN以上", "reading": "いじょう", "en": "NOUN or more"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "〜が始まる", "reading": "はじまる", "en": "to begin (intransitive)"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "〜を始める", "reading": "はじめる", "en": "to begin (transitive)"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "道案内", "reading": "みちあんない", "en": "giving directions"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "携帯、ケータイ、携帯電話", "reading": "けいたい、けいたいでんわ", "en": "mobile phone"},
+  {"lesson": "TN", "date": "2025-12-07", "jp": "音", "reading": "おと", "en": "sound"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "歩行者天国", "reading": "ほこうしゃてんごく", "en": "pedestrian precinct"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "歩行者", "reading": "ほこうしゃ", "en": "pedestrian"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "心配する", "reading": "しんぱいする", "en": "to worry"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "ホッカイロ", "reading": "", "en": "hot packs (hand warmers)"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "博物館", "reading": "はくぶつかん", "en": "museum"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "１人", "reading": "ひとり", "en": "one person"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "〜が回る", "reading": "まわる", "en": "to turn, to rotate (intransitive)"},
+  {"lesson": "TN", "date": "2025-12-14", "jp": "〜を回す", "reading": "まわす", "en": "to turn, to rotate (transitive)"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "美容院", "reading": "びよういん", "en": "hair salon"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "パーマをかける", "reading": "", "en": "to perm (one's hair)"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "きつい↔︎緩い", "reading": "きつい↔︎ゆるい", "en": "tight ↔ loose"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "お願いする", "reading": "おねがいする", "en": "to request, to ask a favor"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "染める", "reading": "そめる", "en": "to dye, to color"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "雰囲気", "reading": "ふいんき", "en": "atmosphere"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "設備", "reading": "せつび", "en": "equipment, facilities"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "正しい", "reading": "ただしい", "en": "correct"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "聞く", "reading": "きく", "en": "to ask"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "ところで、", "reading": "", "en": "by the way"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "トラック", "reading": "", "en": "truck"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "間違い", "reading": "まちがい", "en": "mistake"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "NOUNについて", "reading": "", "en": "about NOUN"},
+  {"lesson": "TN", "date": "2025-12-21", "jp": "お年寄り", "reading": "おとしより", "en": "elderly person"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "明けましておめでとうございます", "reading": "あけまして…", "en": "Happy New Year"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "明ける", "reading": "あける", "en": "to dawn, to end (of a period)"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "天気予報", "reading": "てんきよほう", "en": "weather forecast"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "ブロードウェイ", "reading": "", "en": "Broadway"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "石", "reading": "いし", "en": "stone"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "さらに、", "reading": "", "en": "moreover"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "ツアー", "reading": "", "en": "tour"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "お祈り", "reading": "おいのり", "en": "prayer"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "１月２日", "reading": "いちがつふつか", "en": "January 2nd"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "おじさん", "reading": "", "en": "uncle"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "おじいさん", "reading": "", "en": "grandfather"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "おばさん", "reading": "", "en": "auntie"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "１年前", "reading": "いちねんまえ", "en": "1 year ago"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "開校する", "reading": "かいこうする", "en": "to open a school"},
+  {"lesson": "TN", "date": "2026-01-11", "jp": "紅葉", "reading": "こうよう", "en": "autumn leaves"},
+  {"lesson": "TN", "date": "2026-01-24", "jp": "嬉しい", "reading": "うれしい", "en": "happy"},
+  {"lesson": "TN", "date": "2026-01-24", "jp": "麻雀", "reading": "まーじゃん", "en": "mahjong"},
+  {"lesson": "TN", "date": "2026-01-24", "jp": "案内する", "reading": "あんないする", "en": "to show around, to guide"},
+  {"lesson": "TN", "date": "2026-02-01", "jp": "無事に", "reading": "ぶじに", "en": "safely"},
+  {"lesson": "TN", "date": "2026-02-01", "jp": "雪が積もる", "reading": "ゆきがつもる", "en": "snow piles up"},
+  {"lesson": "TN", "date": "2026-02-01", "jp": "ソリ", "reading": "", "en": "sled"},
+  {"lesson": "TN", "date": "2026-02-01", "jp": "日帰り", "reading": "ひがえり", "en": "day trip"},
+  {"lesson": "TN", "date": "2026-02-01", "jp": "空港", "reading": "くうこう", "en": "airport"},
+  {"lesson": "TN", "date": "2026-02-01", "jp": "出張", "reading": "しゅっちょう", "en": "business trip"},
+  {"lesson": "TN", "date": "2026-02-01", "jp": "回答", "reading": "かいとう", "en": "answer, reply"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "体感温度", "reading": "たいかんおんど", "en": "feels-like temperature"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "久しぶり", "reading": "ひさしぶり", "en": "it's been a while"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "前回", "reading": "ぜんかい", "en": "last time"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "びっくりする", "reading": "", "en": "to be surprised"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "何人か", "reading": "なんにんか", "en": "some people"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "銃", "reading": "じゅう", "en": "gun"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "日中", "reading": "にっちゅう", "en": "during the day"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "夕方", "reading": "ゆうがた", "en": "evening"},
+  {"lesson": "TN", "date": "2026-02-08", "jp": "木曜日", "reading": "もくようび", "en": "Thursday"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "お祝い", "reading": "おいわい", "en": "celebration"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "お寺", "reading": "おてら", "en": "temple"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "水仙、スイセン", "reading": "すいせん", "en": "narcissus"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "香り", "reading": "かおり", "en": "good smell, fragrance"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "白", "reading": "しろ", "en": "white"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "花粉", "reading": "かふん", "en": "pollen"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "春節、旧正月", "reading": "しゅんせつ、きゅうしょうがつ", "en": "Lunar New Year"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "初売り", "reading": "はつうり", "en": "New Year's first sale"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "１日目", "reading": "いちにちめ", "en": "the first day"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "２日目", "reading": "ふつかめ", "en": "the second day"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "７日目", "reading": "なのかめ", "en": "Day 7"},
+  {"lesson": "TN", "date": "2026-02-15", "jp": "口論する", "reading": "こうろんする", "en": "to argue"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "きのこ", "reading": "", "en": "mushroom"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "贅沢な", "reading": "ぜいたくな", "en": "luxurious"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "贅沢盛り", "reading": "ぜいたくもり", "en": "luxurious assortment (of food)"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "盛る", "reading": "もる", "en": "to serve, to pile (food)"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "counter＋個", "reading": "こ", "en": "counter for small objects"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "ぬいぐるみ", "reading": "", "en": "stuffed toy"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "先週", "reading": "せんしゅう", "en": "last week"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "もしかしたら", "reading": "", "en": "perhaps, maybe"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "着く", "reading": "つく", "en": "to arrive"},
+  {"lesson": "TN", "date": "2026-02-22", "jp": "二十歳", "reading": "はたち", "en": "20 years old"},
+  {"lesson": "TN", "date": "2026-03-08", "jp": "地面", "reading": "じめん", "en": "ground"},
+  {"lesson": "TN", "date": "2026-03-08", "jp": "変える", "reading": "かえる", "en": "to change"},
+  {"lesson": "TN", "date": "2026-03-08", "jp": "記念日", "reading": "きねんび", "en": "anniversary"},
+  {"lesson": "TN", "date": "2026-03-08", "jp": "トレーニング、研修", "reading": "けんしゅう", "en": "training"},
+  {"lesson": "TN", "date": "2026-03-08", "jp": "質", "reading": "しつ", "en": "quality"},
+  {"lesson": "TN", "date": "2026-03-08", "jp": "いろいろお世話になりました", "reading": "いろいろおせわになりました", "en": "thank you for everything you've done for me"},
+  {"lesson": "TN", "date": "2026-03-08", "jp": "転勤", "reading": "てんきん", "en": "to be transferred (office)"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "泊まる", "reading": "とまる", "en": "to stay overnight"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "密度", "reading": "みつど", "en": "density"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "春休み", "reading": "はるやすみ", "en": "spring break"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "重要な", "reading": "じゅうような", "en": "important"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "葉桜", "reading": "はざくら", "en": "cherry tree with leaves (post-blossom)"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "葉っぱ", "reading": "はっぱ", "en": "leaf"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "寝坊する", "reading": "ねぼうする", "en": "to oversleep"},
+  {"lesson": "TN", "date": "2026-04-05", "jp": "ずいぶん", "reading": "", "en": "quite, considerably"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "７月", "reading": "しちがつ", "en": "July"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "更新", "reading": "こうしん", "en": "to renew, update"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "考える", "reading": "かんがえる", "en": "to consider, think"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "厚い", "reading": "あつい", "en": "thick"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "衣", "reading": "ころも", "en": "batter (coating, e.g. tempura)"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "油っぽい", "reading": "あぶらっぽい", "en": "oily"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "退職する", "reading": "たいしょくする", "en": "to retire"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "引っ越す", "reading": "ひっこす", "en": "to move (house)"},
+  {"lesson": "TN", "date": "2026-04-19", "jp": "間に合う", "reading": "まにあう", "en": "to be on time"},
+  {"lesson": "TN", "date": "2026-04-25", "jp": "上司", "reading": "じょうし", "en": "boss"},
+  {"lesson": "TN", "date": "2026-04-25", "jp": "横", "reading": "よこ", "en": "beside, next to"},
+  {"lesson": "TN", "date": "2026-05-03", "jp": "２週間ぶり", "reading": "にしゅうかんぶり", "en": "after two weeks"},
+  {"lesson": "TN", "date": "2026-05-03", "jp": "誘う", "reading": "さそう", "en": "to invite"},
+  {"lesson": "TN", "date": "2026-05-03", "jp": "福利厚生", "reading": "ふくりこうせい", "en": "employee benefits"},
+  {"lesson": "TN", "date": "2026-05-09", "jp": "体調", "reading": "たいちょう", "en": "physical condition"},
+  {"lesson": "TN", "date": "2026-05-09", "jp": "１週目", "reading": "いっしゅうめ", "en": "first week"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "手作り", "reading": "てづくり", "en": "handmade"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "明るい", "reading": "あかるい", "en": "bright"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "合計", "reading": "ごうけい", "en": "total"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "もらう", "reading": "", "en": "to receive, to get"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "県", "reading": "けん", "en": "prefecture"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "島、諸島", "reading": "しま、しょとう", "en": "islands"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "厳しい", "reading": "きびしい", "en": "strict"},
+  {"lesson": "TN", "date": "2026-05-16", "jp": "教授", "reading": "きょうじゅ", "en": "professor"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "星", "reading": "ほし", "en": "star"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "ややこしい", "reading": "", "en": "complicated, tricky"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "アワビ", "reading": "", "en": "abalone"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "売り切れ", "reading": "うりきれ", "en": "sold out"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "半島", "reading": "はんとう", "en": "peninsula"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "フレンチ", "reading": "", "en": "French cuisine"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "評価", "reading": "ひょうか", "en": "evaluation"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "リアル脱出ルーム", "reading": "リアルだっしゅつルーム", "en": "real escape room (game)"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "脱出成功", "reading": "だっしゅつせいこう", "en": "successful escape"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "カワウソ", "reading": "", "en": "otter"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "修理する", "reading": "しゅうりする", "en": "to repair"},
+  {"lesson": "TN", "date": "2026-06-14", "jp": "無駄", "reading": "むだ", "en": "waste"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "ヨーグルト", "reading": "", "en": "yogurt"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "冷凍庫", "reading": "れいとうこ", "en": "freezer"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "潰す", "reading": "つぶす", "en": "to crush"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "固い", "reading": "かたい", "en": "hard"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "ストーブ", "reading": "", "en": "heater, stove"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "決勝戦", "reading": "けっしょうせん", "en": "final match"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "声", "reading": "こえ", "en": "voice"},
+  {"lesson": "TN", "date": "2026-06-20", "jp": "気になる", "reading": "きになる", "en": "to be on one's mind, to bother"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "応援する", "reading": "おうえんする", "en": "to support, to cheer for"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "周り", "reading": "まわり", "en": "surroundings, around"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "マイルストーン", "reading": "", "en": "milestone"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "冷凍", "reading": "れいとう", "en": "frozen"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "量が多い", "reading": "りょうがおおい", "en": "large quantity"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "ごま", "reading": "", "en": "sesame"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "ヨーロッパ", "reading": "", "en": "Europe"},
+  {"lesson": "TN", "date": "2026-06-27", "jp": "柔らかい", "reading": "やわらかい", "en": "soft"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "かき氷", "reading": "かきごおり", "en": "shaved ice"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "ブルーベリー", "reading": "", "en": "blueberry"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "〜を入れる", "reading": "いれる", "en": "to put in"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "〜が入る", "reading": "はいる", "en": "to enter, to be contained"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "水っぽい", "reading": "みずっぽい", "en": "watery"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "硬い", "reading": "かたい", "en": "hard (firm)"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "毎回", "reading": "まいかい", "en": "every time"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "手間がかかる", "reading": "てまがかかる", "en": "it takes time and effort"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "改善点", "reading": "かいぜんてん", "en": "points for improvement"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "かくれんぼ", "reading": "", "en": "hide and seek"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "不思議な", "reading": "ふしぎな", "en": "mysterious"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "次回、今度", "reading": "じかい、こんど", "en": "next time"},
+  {"lesson": "TN", "date": "2026-07-04", "jp": "今回", "reading": "こんかい", "en": "this time"},
+  {"lesson": "TN", "date": "2026-07-11", "jp": "勝つ", "reading": "かつ", "en": "to win"},
+  {"lesson": "TN", "date": "2026-07-11", "jp": "要求", "reading": "ようきゅう", "en": "requirement, demand"},
+  {"lesson": "TN", "date": "2026-07-11", "jp": "感情", "reading": "かんじょう", "en": "feeling, emotion"},
+  {"lesson": "TN", "date": "2026-07-11", "jp": "感動する", "reading": "かんどうする", "en": "to be touched, moved"},
+  {"lesson": "TN", "date": "2026-07-11", "jp": "嘘のNOUN", "reading": "うそ", "en": "fake NOUN"},
+  {"lesson": "TN", "date": "2026-07-11", "jp": "有料", "reading": "ゆうりょう", "en": "paid"},
+  {"lesson": "TN", "date": "2026-07-18", "jp": "◯位", "reading": "い", "en": "rank, place (e.g. 3rd place)"},
+  {"lesson": "TN", "date": "2026-07-18", "jp": "決勝", "reading": "けっしょう", "en": "final (match)"},
+  {"lesson": "TN", "date": "2026-07-18", "jp": "地上", "reading": "ちじょう", "en": "above ground"},
+  {"lesson": "TN", "date": "2026-07-18", "jp": "地下", "reading": "ちか", "en": "underground"},
+  {"lesson": "TN", "date": "2026-07-18", "jp": "通う", "reading": "かよう", "en": "to commute, to go regularly"},
+  {"lesson": "TN", "date": "2026-07-24", "jp": "毎年", "reading": "まいとし", "en": "every year"},
+  {"lesson": "TN", "date": "2026-07-24", "jp": "遅い", "reading": "おそい", "en": "late"},
+  {"lesson": "TN", "date": "2026-07-24", "jp": "回収する", "reading": "かいしゅうする", "en": "to collect"},
+  {"lesson": "TN", "date": "2026-07-24", "jp": "鍵をかける", "reading": "かぎをかける", "en": "to lock"},
+  {"lesson": "TN", "date": "2026-07-24", "jp": "喋る", "reading": "しゃべる", "en": "to chat, talk"},
+  {"lesson": "TN", "date": "2026-07-24", "jp": "主婦", "reading": "しゅふ", "en": "housewife"},
+  {"lesson": "TN", "date": "2026-07-24", "jp": "ちょうどいい", "reading": "", "en": "just right"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "退屈", "reading": "たいくつ", "en": "bored"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "彼ら", "reading": "かれら", "en": "they"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "男", "reading": "おとこ", "en": "man"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "二段ベッド", "reading": "にだんベッド", "en": "bunk bed"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "お皿を洗う", "reading": "おさらをあらう", "en": "to wash dishes"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "昼寝", "reading": "ひるね", "en": "nap"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "拾う", "reading": "ひろう", "en": "to pick up"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "経験", "reading": "けいけん", "en": "experience"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "続ける", "reading": "つづける", "en": "to continue"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "日にち", "reading": "ひにち", "en": "date (day)"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "お腹が空く", "reading": "おなかがすく", "en": "to get hungry"},
+  {"lesson": "TN", "date": "2026-07-31", "jp": "喉が渇く", "reading": "のどがかわく", "en": "to get thirsty"},
+  {"lesson": "TN", "date": "2026-08-17", "jp": "林", "reading": "はやし", "en": "forest"},
+  {"lesson": "TN", "date": "2026-08-17", "jp": "山火事", "reading": "やまかじ", "en": "wildfire"},
+  {"lesson": "TN", "date": "2026-08-17", "jp": "匂い", "reading": "におい", "en": "smell"},
+  {"lesson": "TN", "date": "2026-08-17", "jp": "火", "reading": "ひ", "en": "fire"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "花粉症", "reading": "かふんしょう", "en": "hay fever"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "痒い", "reading": "かゆい", "en": "itchy"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "子犬", "reading": "こいぬ", "en": "puppy"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "２種類", "reading": "にしゅるい", "en": "2 types"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "おしっこ", "reading": "", "en": "pee"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "どこにでも", "reading": "", "en": "everywhere"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "癒す", "reading": "いやす", "en": "to heal"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "ゴールデンレトリバー", "reading": "", "en": "Golden Retriever"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "飼う", "reading": "かう", "en": "to keep (a pet)"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "いくつかのNOUN", "reading": "", "en": "some NOUN"},
+  {"lesson": "TN", "date": "2026-08-22", "jp": "ほとんどのNOUN", "reading": "", "en": "most (of)"},
+  {"lesson": "TN", "date": "2026-08-27", "jp": "話", "reading": "はなし", "en": "story"},
+  {"lesson": "TN", "date": "2026-08-27", "jp": "話す", "reading": "はなす", "en": "to speak"},
+  {"lesson": "TN", "date": "2026-08-27", "jp": "外れる", "reading": "はずれる", "en": "comes off"},
+  {"lesson": "TN", "date": "2026-08-27", "jp": "外す", "reading": "はずす", "en": "to remove"},
+  {"lesson": "TN", "date": "2026-08-27", "jp": "拭く", "reading": "ふく", "en": "to wipe"},
+  {"lesson": "TN", "date": "2026-08-27", "jp": "片付ける", "reading": "かたづける", "en": "to put away"},
+  {"lesson": "TN", "date": "2026-08-27", "jp": "指", "reading": "ゆび", "en": "finger"},
+  {"lesson": "TN", "date": "2026-09-05", "jp": "日光浴", "reading": "にっこうよく", "en": "sunbathing"},
+  {"lesson": "TN", "date": "2026-09-05", "jp": "ペットショップ", "reading": "", "en": "pet shop"},
+  {"lesson": "TN", "date": "2026-09-05", "jp": "店長", "reading": "てんちょう", "en": "shop manager/owner"},
+  {"lesson": "TN", "date": "2026-09-05", "jp": "大人しい", "reading": "おとなしい", "en": "obedient, calm"},
+  {"lesson": "TN", "date": "2026-09-05", "jp": "傷", "reading": "きず", "en": "scar"},
+  {"lesson": "TN", "date": "2026-09-05", "jp": "ペットサロン", "reading": "", "en": "pet salon (grooming)"},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "鼻血", "reading": "はなぢ", "en": "nosebleed"},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "くしゃみ", "reading": "", "en": "sneeze"},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "単語", "reading": "たんご", "en": "vocabulary"},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "豚", "reading": "ぶた", "en": "pig"},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "貯金箱", "reading": "ちょきんばこ", "en": "piggy bank"},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "NOUNのおかげで", "reading": "", "en": "thanks to NOUN"},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "確か", "reading": "たしか", "en": "if I recall correctly..."},
+  {"lesson": "TN", "date": "2026-09-12", "jp": "確かに", "reading": "たしかに", "en": "surely, certainly"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "イタリア", "reading": "", "en": "Italy"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "スリ", "reading": "", "en": "pickpocket, thief"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "危うく", "reading": "あやうく", "en": "almost (something bad happened)"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "通り", "reading": "とおり", "en": "street"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "中古", "reading": "ちゅうこ", "en": "second-hand"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "売る", "reading": "うる", "en": "to sell"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "往復", "reading": "おうふく", "en": "round trip"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "てるてる坊主", "reading": "てるてるぼうず", "en": "teru teru bozu (weather charm doll)"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "しまう", "reading": "", "en": "to put away"},
+  {"lesson": "TN", "date": "2026-09-19", "jp": "懐中電灯", "reading": "かいちゅうでんとう", "en": "flashlight"},
+  {"lesson": "TN", "date": "2026-09-26", "jp": "ゆっくりする、休む", "reading": "やすむ", "en": "to rest"},
+  {"lesson": "TN", "date": "2026-09-26", "jp": "持続可能性、サステナビリティ", "reading": "じぞくかのうせい", "en": "sustainability"},
+  {"lesson": "TN", "date": "2026-09-26", "jp": "エコ", "reading": "", "en": "eco(-friendly)"},
+  {"lesson": "TN", "date": "2026-09-26", "jp": "レンタルする", "reading": "", "en": "to rent"},
+  {"lesson": "TN", "date": "2026-09-26", "jp": "食器棚", "reading": "しょっきだな", "en": "cupboard"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "施設", "reading": "しせつ", "en": "facility"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "温度", "reading": "おんど", "en": "temperature"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "温水プール", "reading": "おんすいプール", "en": "heated pool"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "中華街", "reading": "ちゅうかがい", "en": "Chinatown"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "アーケード", "reading": "", "en": "arcade"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "下手な", "reading": "へたな", "en": "bad at"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "実際", "reading": "じっさい", "en": "actually, in fact"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "繋ぐ", "reading": "つなぐ", "en": "to connect"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "謎解き、脱出ゲーム", "reading": "なぞとき、だっしゅつゲーム", "en": "escape room"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "台所、キッチン", "reading": "だいどころ", "en": "kitchen"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "丸い", "reading": "まるい", "en": "round"},
+  {"lesson": "TN", "date": "2026-10-03", "jp": "目が覚める", "reading": "めがさめる", "en": "to wake up"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "OB", "reading": "オービー", "en": "male alumnus (job-hunting term)"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "OG", "reading": "オージー", "en": "female alumna (job-hunting term)"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "訪問", "reading": "ほうもん", "en": "visit"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "評価する", "reading": "ひょうかする", "en": "to evaluate"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "希望する", "reading": "きぼうする", "en": "would like to (request)"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "返す", "reading": "かえす", "en": "to reply, to return"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "負ける", "reading": "まける", "en": "to lose"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "その他", "reading": "そのほか", "en": "other, et cetera"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "ネジを巻く", "reading": "ねじをまく", "en": "to wind (a screw/spring)"},
+  {"lesson": "TN", "date": "2026-10-10", "jp": "しばらく", "reading": "", "en": "for a while"}
 ];
 
-const vocabLessonNumbers = [...new Set(vocabData.map(d => d.lesson))].sort((a,b) => a-b);
-let activeVocabLessons = new Set(vocabLessonNumbers);
+// Each vocab entry gets a tagId: "L16".."L31" for textbook-lesson words,
+// or "TN-2025H1" etc for teacher's-notes (live-lesson) words grouped by half-year.
+function vocabTagId(d){
+  if(d.lesson === 'TN'){
+    const [y,m] = d.date.split('-');
+    return 'TN-' + y + (Number(m) <= 6 ? 'H1' : 'H2');
+  }
+  return 'L' + d.lesson;
+}
+vocabData.forEach(d => { d.tagId = vocabTagId(d); });
+
+const vocabLessonNumbers = [...new Set(vocabData.filter(d => d.lesson !== 'TN').map(d => d.lesson))].sort((a,b) => a-b);
+const teacherNoteHalves = [...new Set(vocabData.filter(d => d.lesson === 'TN').map(d => d.tagId.slice(3)))].sort();
+const lessonTagIds = vocabLessonNumbers.map(n => 'L' + n);
+const teacherTagIds = teacherNoteHalves.map(h => 'TN-' + h);
+const allVocabTagIds = [...lessonTagIds, ...teacherTagIds];
+
+let activeVocabTags = new Set(allVocabTagIds);
 let deck = [];
 let deckIndex = 0;
 let cardFlipped = false;
 let reverseMode = false;
 
+function formatDateBadge(dateStr){
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const [y,m,d] = dateStr.split('-').map(Number);
+  return `${months[m-1]} ${d}, ${y}`;
+}
+function halfLabel(half){
+  const year = half.slice(0,4);
+  const h = half.slice(4);
+  return `${year} ${h==='H1' ? 'Jan–Jun' : 'Jul–Dec'}`;
+}
+
 const vocabClusterDefs = [];
-for(let i=0; i<vocabLessonNumbers.length; i+=6){
-  const chunk = vocabLessonNumbers.slice(i, i+6);
-  vocabClusterDefs.push({label:`Lessons ${chunk[0]}–${chunk[chunk.length-1]}`, nums:chunk});
+for(let i=0; i<lessonTagIds.length; i+=6){
+  const chunk = lessonTagIds.slice(i, i+6);
+  const nums = chunk.map(t => Number(t.slice(1)));
+  vocabClusterDefs.push({label:`Lessons ${nums[0]}–${nums[nums.length-1]}`, tags:chunk, chipText:t => 'Lesson ' + t.slice(1)});
+}
+if(teacherTagIds.length){
+  vocabClusterDefs.push({label:"📝 Teacher's Notes (live-lesson vocabulary)", tags:teacherTagIds, chipText:t => halfLabel(t.slice(3))});
 }
 
 function renderVocabFilter(){
@@ -1174,11 +1874,11 @@ function renderVocabFilter(){
 
   const head = document.createElement('div');
   head.className = 'filter-panel-head';
-  head.innerHTML = `<span>Browse by lesson</span>`;
+  head.innerHTML = `<span>Browse by lesson or date</span>`;
   const allBtn = document.createElement('button');
-  allBtn.textContent = 'All lessons';
+  allBtn.textContent = 'All vocabulary';
   allBtn.className = 'chip-all-btn active';
-  allBtn.onclick = () => { activeVocabLessons = new Set(vocabLessonNumbers); buildDeck(); highlightVocabFilterButtons(); };
+  allBtn.onclick = () => { activeVocabTags = new Set(allVocabTagIds); buildDeck(); highlightVocabFilterButtons(); };
   head.appendChild(allBtn);
   el.appendChild(head);
 
@@ -1191,16 +1891,16 @@ function renderVocabFilter(){
     wrap.appendChild(label);
     const row = document.createElement('div');
     row.className = 'chip-row';
-    cluster.nums.forEach(num => {
+    cluster.tags.forEach(tag => {
       const b = document.createElement('button');
       b.className = 'chip active';
-      b.textContent = 'Lesson ' + num;
-      b.dataset.lesson = num;
+      b.textContent = cluster.chipText(tag);
+      b.dataset.tag = tag;
       b.onclick = () => {
-        if(activeVocabLessons.has(num) && activeVocabLessons.size===1){
-          activeVocabLessons = new Set(vocabLessonNumbers);
+        if(activeVocabTags.has(tag) && activeVocabTags.size===1){
+          activeVocabTags = new Set(allVocabTagIds);
         } else {
-          activeVocabLessons = new Set([num]);
+          activeVocabTags = new Set([tag]);
         }
         buildDeck(); highlightVocabFilterButtons();
       };
@@ -1212,16 +1912,16 @@ function renderVocabFilter(){
 }
 function highlightVocabFilterButtons(){
   const el = document.getElementById('vocabFilter');
-  const allActive = activeVocabLessons.size === vocabLessonNumbers.length;
+  const allActive = activeVocabTags.size === allVocabTagIds.length;
   el.querySelector('.chip-all-btn').classList.toggle('active', allActive);
   el.querySelectorAll('.chip').forEach(b=>{
-    const num = Number(b.dataset.lesson);
-    b.classList.toggle('active', allActive || (activeVocabLessons.has(num) && activeVocabLessons.size===1));
+    const tag = b.dataset.tag;
+    b.classList.toggle('active', allActive || (activeVocabTags.has(tag) && activeVocabTags.size===1));
   });
 }
 
 function buildDeck(){
-  deck = shuffle(vocabData.filter(d => activeVocabLessons.has(d.lesson)));
+  deck = shuffle(vocabData.filter(d => activeVocabTags.has(d.tagId)));
   deckIndex = 0;
   cardFlipped = false;
   renderCard();
@@ -1242,10 +1942,11 @@ function renderCard(){
   }
   const item = deck[deckIndex];
   progressEl.textContent = `Card ${deckIndex+1} of ${deck.length}`;
+  const badge = item.lesson === 'TN' ? `Teacher's Notes · ${formatDateBadge(item.date)}` : `Lesson ${item.lesson}`;
 
   const frontFace = `
     <div class="flashcard" onclick="flipCard()">
-      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-lesson">${badge}</div>
       <div class="flashcard-jp">${escapeHtml(item.jp)}</div>
       ${item.reading ? `<div class="flashcard-reading">${escapeHtml(item.reading)}</div>` : ''}
       <div class="flashcard-hint">Tap to reveal meaning</div>
@@ -1253,21 +1954,21 @@ function renderCard(){
   `;
   const backFace = `
     <div class="flashcard" onclick="flipCard()">
-      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-lesson">${badge}</div>
       <div class="flashcard-en">${escapeHtml(item.en)}</div>
       <div class="flashcard-hint">Tap to flip back</div>
     </div>
   `;
   const reverseFront = `
     <div class="flashcard" onclick="flipCard()">
-      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-lesson">${badge}</div>
       <div class="flashcard-en">${escapeHtml(item.en)}</div>
       <div class="flashcard-hint">Tap to reveal word</div>
     </div>
   `;
   const reverseBack = `
     <div class="flashcard" onclick="flipCard()">
-      <div class="flashcard-lesson">Lesson ${item.lesson}</div>
+      <div class="flashcard-lesson">${badge}</div>
       <div class="flashcard-jp">${escapeHtml(item.jp)}</div>
       ${item.reading ? `<div class="flashcard-reading">${escapeHtml(item.reading)}</div>` : ''}
       <div class="flashcard-hint">Tap to flip back</div>
